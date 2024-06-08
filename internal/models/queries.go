@@ -11,5 +11,5 @@ type ObservationQuery struct {
 	StoredQuery // Anonymous field
 	Place 		string
 	Fmisid 		int
-	timestep	int
+	Timestep	int
 }
