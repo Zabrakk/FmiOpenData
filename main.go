@@ -11,7 +11,6 @@ import (
 
 func GetQueryResult() {
 	query := models.GetDailyObservationStructForPlace("Helsinki")
-	//query := models.GetDailyObservationStructForFmisid(100968)
 	queryResult, err := http.GetQueryResult(query)
 	defer queryResult.Close() // Close when this function's execution ends.
 	if err != nil {
@@ -23,8 +22,7 @@ func GetQueryResult() {
 		fmt.Println("ERROR WHILE PARSING XML!!!")
 		return
 	}
-	for _, obs := range result {
-		fmt.Println(obs)
-		fmt.Println()
+	for _, m := range result.Precipitation() {
+		fmt.Println(m.Value, m.Time)
 	}
 }
