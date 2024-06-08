@@ -1,11 +1,14 @@
 package models
 
+// THESE ARE SYNOP OBSERVATIONS
+// TODO: Instantaneous Weather Observations (real-time) fmi::observations::weather::multipointcoverage
+
 import (
 	"strings"
 	"encoding/xml"
 )
 
-type DailyMeasrurements struct {
+type AllMeasrurements struct {
 	MeasurementTimeseries []MeasurementTimeseries
 }
 
@@ -30,9 +33,9 @@ type MeasurementTVP struct {
 	Value string `xml:"value"`
 }
 
-func get_mts(dm DailyMeasrurements, name string) []MeasurementTVP {
+func get_mts(am AllMeasrurements, name string) []MeasurementTVP {
 	var result []MeasurementTVP
-	for _, mts := range dm.MeasurementTimeseries {
+	for _, mts := range am.MeasurementTimeseries {
 		if strings.Contains(mts.Name, name) {
 			for _, point := range mts.Measurements {
 				result = append(result, point.Measurement)
@@ -43,26 +46,78 @@ func get_mts(dm DailyMeasrurements, name string) []MeasurementTVP {
 	return nil
 }
 
-func (dm DailyMeasrurements) Precipitation() []MeasurementTVP {
-	return get_mts(dm, "rrday")
+/*
+ * DAILY OBSERVATIONS
+*/
+
+func (am AllMeasrurements) DailyPrecipitations() []MeasurementTVP {
+	return get_mts(am, "rrday")
 }
 
-func (dm DailyMeasrurements) AirTemperature() []MeasurementTVP {
-	return get_mts(dm, "tday")
+func (am AllMeasrurements) DailyAirTemperatures() []MeasurementTVP {
+	return get_mts(am, "tday")
 }
 
-func (dm DailyMeasrurements) MinimumTemperature() []MeasurementTVP {
-	return get_mts(dm, "tmin")
+func (am AllMeasrurements) DailyMinTemperatures() []MeasurementTVP {
+	return get_mts(am, "tmin")
 }
 
-func (dm DailyMeasrurements) MaximumTemperature() []MeasurementTVP {
-	return get_mts(dm, "tmax")
+func (am AllMeasrurements) DailyMaxTemperatures() []MeasurementTVP {
+	return get_mts(am, "tmax")
 }
 
-func (dm DailyMeasrurements) GroundMinimumTemperature() []MeasurementTVP {
-	return get_mts(dm, "TG_PT12H_min")
+func (am AllMeasrurements) DailyGroundMinimumTemperatures() []MeasurementTVP {
+	return get_mts(am, "TG_PT12H_min")
 }
 
-func (dm DailyMeasrurements) SnowDepth() []MeasurementTVP {
-	return get_mts(dm, "snow")
+func (am AllMeasrurements) DailySnowDepths() []MeasurementTVP {
+	return get_mts(am, "snow")
+}
+
+/*
+ * HOURLY OBSERVATIONS
+*/
+
+func (am AllMeasrurements) HourlyAirTemperatures() []MeasurementTVP {
+	return get_mts(am, "TA_PT1H_AVG")
+}
+
+func (am AllMeasrurements) HourlyMaxTemperatures() []MeasurementTVP {
+	return get_mts(am, "TA_PT1H_MAX")
+}
+
+func (am AllMeasrurements) HourlyMinTemperatures() []MeasurementTVP {
+	return get_mts(am, "TA_PT1H_MAX")
+}
+
+func (am AllMeasrurements) HourlyRelativehumidities() []MeasurementTVP {
+	return get_mts(am, "RH_PT1H_AVG")
+}
+
+func (am AllMeasrurements) HourlyWindSpeeds() []MeasurementTVP {
+	return get_mts(am, "WS_PT1H_AVG")
+}
+
+func (am AllMeasrurements) HourlyMaxWindSpeeds() []MeasurementTVP {
+	return get_mts(am, "WS_PT1H_MAX")
+}
+
+func (am AllMeasrurements) HourlyMinWindSpeeds() []MeasurementTVP {
+	return get_mts(am, "WS_PT1H_MIN")
+}
+
+func (am AllMeasrurements) HourlyWindDirections() []MeasurementTVP {
+	return get_mts(am, "WD_PT1H_AVG")
+}
+
+func (am AllMeasrurements) HourlyPrecipitations() []MeasurementTVP {
+	return get_mts(am, "PRA_PT1H_ACC")
+}
+
+func (am AllMeasrurements) HourlyMaxPrecipitationIntensities() []MeasurementTVP {
+	return get_mts(am, "PRI_PT1H_MAX")
+}
+
+func (am AllMeasrurements) HourlyAirPressures() []MeasurementTVP {
+	return get_mts(am, "PA_PT1H_AVG")
 }
