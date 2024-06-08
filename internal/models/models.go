@@ -1,5 +1,7 @@
 package models
 
+//import "encoding/xml"
+
 type StoredQuery struct {
 	Id			string
 	StartTime	string
@@ -22,3 +24,9 @@ type Observation struct {
 	TemperatureMin	float64
 }
 
+
+type Obs struct {
+	//XMLName xml.Name `xml:"MeasurementTVP"`
+	Time string	`xml:"time"`
+	Value string `xml:"value"`
+}
