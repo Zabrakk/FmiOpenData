@@ -1,6 +1,6 @@
 package models
 
-//import "encoding/xml"
+import "encoding/xml"
 
 type StoredQuery struct {
 	Id			string
@@ -16,17 +16,19 @@ type ObservationQuery struct {
 	timestep	int
 }
 
-type Observation struct {
-	PrecipitationRate float64
-	SnowDepth	float64
-	TemperatureMean float64
-	TemperatureMax	float64
-	TemperatureMin	float64
+type MeasurementTimeseries struct {
+	MeasurementName string
+	XMLName xml.Name `xml:"MeasurementTimeseries"`
+	Points []Point `xml:"point"`
 }
 
+type Point struct {
+	XMLName xml.Name `xml:"point"`
+	Observation Obs `xml:"MeasurementTVP"`
+}
 
 type Obs struct {
-	//XMLName xml.Name `xml:"MeasurementTVP"`
+	XMLName xml.Name `xml:"MeasurementTVP"`
 	Time string	`xml:"time"`
 	Value string `xml:"value"`
 }
