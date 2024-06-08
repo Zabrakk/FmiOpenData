@@ -2,6 +2,7 @@ package fmiopendata
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/Zabrakk/FmiOpenData/internal/models"
 	"github.com/Zabrakk/FmiOpenData/internal/http"
@@ -25,4 +26,14 @@ func GetQueryResult() {
 	for _, m := range result.Precipitation() {
 		fmt.Println(m.Value, m.Time)
 	}
+}
+
+func GetDailyObservationQuery() models.StoredQuery {
+	query := models.StoredQuery{}
+	query.Id = "fmi::observations::weather::daily::timevaluepair"
+	return query
+}
+
+func TimeToQueryFormat(t time.Time) string {
+	return t.Format("2006-01-02T00:00:00Z")
 }
