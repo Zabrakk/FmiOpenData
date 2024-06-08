@@ -8,8 +8,8 @@ import (
 	"github.com/Zabrakk/FmiOpenData/internal/models"
 )
 
-func ParseQueryResult(respBody io.ReadCloser) ([]models.MeasurementTimeseries, error) {
-	var result []models.MeasurementTimeseries
+func ParseQueryResult(respBody io.ReadCloser) (models.DailyMeasrurements, error) {
+	var result models.DailyMeasrurements
 	decoder := xml.NewDecoder(respBody)
 	for {
 		token, err := decoder.Token()
@@ -24,8 +24,8 @@ func ParseQueryResult(respBody io.ReadCloser) ([]models.MeasurementTimeseries, e
 			if startElement.Name.Local == "MeasurementTimeseries" {
 				var measurementTimeseries models.MeasurementTimeseries
 				decoder.DecodeElement(&measurementTimeseries, &startElement)
-				measurementTimeseries.MeasurementName = startElement.Attr[0].Value
-				result = append(result, measurementTimeseries)
+				measurementTimeseries.Name = startElement.Attr[0].Value
+				result.MeasurementTimeseries = append(result.MeasurementTimeseries, measurementTimeseries)
 			}
 		}
 	}
