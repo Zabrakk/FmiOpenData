@@ -34,7 +34,6 @@ func queryToUrlString(query models.ObservationQuery) (string, error) {
 	if len(query.Parameters) > 0 {
 		url += "&parameters=" + strings.Join(query.Parameters[:], ",")
 	}
-	fmt.Println(url)
 	return url, nil
 }
 
