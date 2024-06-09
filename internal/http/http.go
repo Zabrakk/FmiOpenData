@@ -7,7 +7,7 @@ import (
 	"errors"
 	nhttp "net/http"
 
-	"github.com/Zabrakk/FmiOpenData/internal/models"
+	"github.com/Zabrakk/FmiOpenData/models"
 )
 
 func queryToUrlString(query models.ObservationQuery) (string, error) {

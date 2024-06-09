@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Zabrakk/FmiOpenData/internal/models"
+	"github.com/Zabrakk/FmiOpenData/models"
 	"github.com/Zabrakk/FmiOpenData/internal/http"
 	"github.com/Zabrakk/FmiOpenData/internal/xmlparser"
 )
@@ -37,7 +37,7 @@ func GetQueryResult(query models.ObservationQuery) {
 		fmt.Println("ERROR WHILE PARSING XML!!!")
 		return
 	}
-	for _, m := range result.Precipitation() {
+	for _, m := range result.HourlyAirTemperatures() {
 		fmt.Println(m.Value, m.Time)
 	}
 }

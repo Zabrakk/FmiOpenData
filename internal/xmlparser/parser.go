@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/Zabrakk/FmiOpenData/internal/models"
+	"github.com/Zabrakk/FmiOpenData/models"
 )
 
 func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasrurements, error) {
