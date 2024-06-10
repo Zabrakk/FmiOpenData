@@ -122,42 +122,97 @@ func (am AllMeasrurements) HourlyAirTemperatures() []MeasurementTVP {
 	return get_mts(am, "TA_PT1H_AVG")
 }
 
+func (am AllMeasrurements) LatestHourlyAirTemperature() MeasurementTVP {
+	mtvps := am.HourlyAirTemperatures()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyMaxTemperatures() []MeasurementTVP {
 	return get_mts(am, "TA_PT1H_MAX")
+}
+
+func (am AllMeasrurements) LatestHourlyMaxTemperature() MeasurementTVP {
+	mtvps := am.HourlyMaxTemperatures()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) HourlyMinTemperatures() []MeasurementTVP {
 	return get_mts(am, "TA_PT1H_MAX")
 }
 
+func (am AllMeasrurements) LatestHourlyMinTemperature() MeasurementTVP {
+	mtvps := am.HourlyMinTemperatures()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyRelativehumidities() []MeasurementTVP {
 	return get_mts(am, "RH_PT1H_AVG")
+}
+
+func (am AllMeasrurements) LatestHourlyRelativehumidity() MeasurementTVP {
+	mtvps := am.HourlyRelativehumidities()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) HourlyWindSpeeds() []MeasurementTVP {
 	return get_mts(am, "WS_PT1H_AVG")
 }
 
+func (am AllMeasrurements) LatestHourlyWindSpeed() MeasurementTVP {
+	mtvps := am.HourlyWindSpeeds()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyMaxWindSpeeds() []MeasurementTVP {
 	return get_mts(am, "WS_PT1H_MAX")
+}
+
+func (am AllMeasrurements) LatestHourlyMaxWindSpeed() MeasurementTVP {
+	mtvps := am.HourlyMaxWindSpeeds()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) HourlyMinWindSpeeds() []MeasurementTVP {
 	return get_mts(am, "WS_PT1H_MIN")
 }
 
+func (am AllMeasrurements) LatestHourlyMinWindSpeed() MeasurementTVP {
+	mtvps := am.HourlyMinWindSpeeds()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyWindDirections() []MeasurementTVP {
 	return get_mts(am, "WD_PT1H_AVG")
+}
+
+func (am AllMeasrurements) LatestHourlyWindDirection() MeasurementTVP {
+	mtvps := am.HourlyWindDirections()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) HourlyPrecipitations() []MeasurementTVP {
 	return get_mts(am, "PRA_PT1H_ACC")
 }
 
+func (am AllMeasrurements) LatestHourlyPrecipitation() MeasurementTVP {
+	mtvps := am.HourlyPrecipitations()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyMaxPrecipitationIntensities() []MeasurementTVP {
 	return get_mts(am, "PRI_PT1H_MAX")
 }
 
+func (am AllMeasrurements) LatestHourlyMaxPrecipitationIntensity() MeasurementTVP {
+	mtvps := am.HourlyMaxPrecipitationIntensities()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) HourlyAirPressures() []MeasurementTVP {
 	return get_mts(am, "PA_PT1H_AVG")
+}
+
+func (am AllMeasrurements) LatestHourlyAirPressure() MeasurementTVP {
+	mtvps := am.HourlyAirPressures()
+	return mtvps[len(mtvps)-1]
 }
