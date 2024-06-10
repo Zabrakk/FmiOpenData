@@ -19,7 +19,7 @@ type ObservationQuery struct {
 }
 
 func timeToQueryFormat(t time.Time) string {
-	return t.Format("2006-01-02T00:00:00Z")
+	return t.Format("2006-01-02T15:04:05Z")
 }
 
 func (q *ObservationQuery) SetPlace(place string) {
