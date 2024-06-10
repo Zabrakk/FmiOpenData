@@ -4,6 +4,8 @@ package models
 // TODO: Instantaneous Weather Observations (real-time) fmi::observations::weather::multipointcoverage
 
 import (
+	"time"
+	"strconv"
 	"strings"
 	"encoding/xml"
 )
@@ -46,6 +48,14 @@ func get_mts(am AllMeasrurements, name string) []MeasurementTVP {
 	return nil
 }
 
+func (mtvp MeasurementTVP) GetValue() (float64, error) {
+	return strconv.ParseFloat(mtvp.Value, 64)
+}
+
+func (mtvp MeasurementTVP) GetTime() (time.Time, error) {
+	return time.Parse("2006-01-02T15:04:05Z", mtvp.Time)
+}
+
 /*
  * DAILY OBSERVATIONS
 */
@@ -54,24 +64,54 @@ func (am AllMeasrurements) DailyPrecipitations() []MeasurementTVP {
 	return get_mts(am, "rrday")
 }
 
+func (am AllMeasrurements) LatestDailyPrecipitation() MeasurementTVP {
+	mtvps := am.DailyPrecipitations()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) DailyAirTemperatures() []MeasurementTVP {
 	return get_mts(am, "tday")
+}
+
+func (am AllMeasrurements) LatestDailyAirTemperature() MeasurementTVP {
+	mtvps := am.DailyAirTemperatures()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) DailyMinTemperatures() []MeasurementTVP {
 	return get_mts(am, "tmin")
 }
 
+func (am AllMeasrurements) LatestDailyMinTemperature() MeasurementTVP {
+	mtvps := am.DailyMinTemperatures()
+	return mtvps[len(mtvps)-1]
+}
+
 func (am AllMeasrurements) DailyMaxTemperatures() []MeasurementTVP {
 	return get_mts(am, "tmax")
 }
 
-func (am AllMeasrurements) DailyGroundMinimumTemperatures() []MeasurementTVP {
+func (am AllMeasrurements) LatestDailyMaxTemperature() MeasurementTVP {
+	mtvps := am.DailyMaxTemperatures()
+	return mtvps[len(mtvps)-1]
+}
+
+func (am AllMeasrurements) DailyGroundMinTemperatures() []MeasurementTVP {
 	return get_mts(am, "TG_PT12H_min")
+}
+
+func (am AllMeasrurements) LatestDailyGroundMinTemperature() MeasurementTVP {
+	mtvps := am.DailyGroundMinTemperatures()
+	return mtvps[len(mtvps)-1]
 }
 
 func (am AllMeasrurements) DailySnowDepths() []MeasurementTVP {
 	return get_mts(am, "snow")
+}
+
+func (am AllMeasrurements) LatestDailySnowDepth() MeasurementTVP {
+	mtvps := am.DailySnowDepths()
+	return mtvps[len(mtvps)-1]
 }
 
 /*
