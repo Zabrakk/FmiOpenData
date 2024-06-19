@@ -22,14 +22,6 @@ func timeToQueryFormat(t time.Time) string {
 	return t.Format("2006-01-02T15:04:05Z")
 }
 
-func (q *ObservationQuery) SetPlace(place string) {
-	q.Place = place
-}
-
-func (q *ObservationQuery) SetFmisid(fmisid int) {
-	q.Fmisid = fmisid
-}
-
 func (q *ObservationQuery) SetStartTime(startTime time.Time) {
 	q.StartTime = timeToQueryFormat(startTime)
 }
@@ -44,4 +36,12 @@ func (q *ObservationQuery) SetTimestep(timestep int) {
 
 func (q *ObservationQuery) SetParameters(parameters []string) {
 	q.Parameters = parameters
+}
+
+func (q *ObservationQuery) SetPlace(place string) {
+	q.Place = place
+}
+
+func (q *ObservationQuery) SetFmisid(fmisid int) {
+	q.Fmisid = fmisid
 }
