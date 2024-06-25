@@ -48,6 +48,13 @@ func get_measurements(am AllMeasrurements, name string) []MeasurementTVP {
 	return nil
 }
 
+func get_latest(mtvps []MeasurementTVP) MeasurementTVP {
+	if len(mtvps) < 1 {
+		return MeasurementTVP{}
+	}
+	return mtvps[len(mtvps)-1]
+}
+
 func (mtvp MeasurementTVP) GetValue() (float64, error) {
 	return strconv.ParseFloat(mtvp.Value, 64)
 }
@@ -69,8 +76,7 @@ func (am AllMeasrurements) DailyPrecipitations() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailyPrecipitation() MeasurementTVP {
-	mtvps := am.DailyPrecipitations()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailyPrecipitations())
 }
 
 func (am AllMeasrurements) DailyAirTemperatures() []MeasurementTVP {
