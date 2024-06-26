@@ -141,13 +141,13 @@ func compare_mtvp_slices(a []MeasurementTVP, b []MeasurementTVP) bool {
 	return true
 }
 
-func check_measurementTVP_slice_uniformity(t *testing.T, m1 []MeasurementTVP, m2 []MeasurementTVP) {
+func check_measurementTVP_slice_is_correct(t *testing.T, m1 []MeasurementTVP, m2 []MeasurementTVP) {
 	if !compare_mtvp_slices(m1, m2) {
 		t.Fatalf("%q != %q", m1, m2)
 	}
 }
 
-func check_measuremenTVP_uniformity(t *testing.T, m1 MeasurementTVP, m2 MeasurementTVP) {
+func check_measuremenTVP_is_correct(t *testing.T, m1 MeasurementTVP, m2 MeasurementTVP) {
 	if m1 != m2 {
 		t.Fatalf("%q != %q", m1, m2)
 	}
@@ -156,22 +156,22 @@ func check_measuremenTVP_uniformity(t *testing.T, m1 MeasurementTVP, m2 Measurem
 func TestDailyPrecipitations(t *testing.T) {
 	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	check_measurementTVP_slice_uniformity(t, dams.DailyPrecipitations(), expected)
+	check_measurementTVP_slice_is_correct(t, dams.DailyPrecipitations(), expected)
 	// Data missing
 	expected = []MeasurementTVP{}
-	check_measurementTVP_slice_uniformity(t, missing_dams.DailyPrecipitations(), expected)
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailyPrecipitations(), expected)
 	// Data empty
-	check_measurementTVP_slice_uniformity(t, empty_dams.DailyPrecipitations(), expected)
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailyPrecipitations(), expected)
 }
 
 func TestLatestDailyPrecipitation(t *testing.T) {
 	// Normal
-	check_measuremenTVP_uniformity(t, dams.LatestDailyPrecipitation(), m2)
+	check_measuremenTVP_is_correct(t, dams.LatestDailyPrecipitation(), m2)
 	// Data missing
 	m := MeasurementTVP{}
-	check_measuremenTVP_uniformity(t, missing_dams.LatestDailyPrecipitation(), m)
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailyPrecipitation(), m)
 	// Data empty
-	check_measuremenTVP_uniformity(t, empty_dams.LatestDailyPrecipitation(), m)
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailyPrecipitation(), m)
 }
 
 func TestDailyAirTemperatures(t *testing.T) {
