@@ -141,15 +141,15 @@ func compare_mtvp_slices(a []MeasurementTVP, b []MeasurementTVP) bool {
 	return true
 }
 
-func check_measurementTVP_slice_is_correct(t *testing.T, m1 []MeasurementTVP, m2 []MeasurementTVP) {
-	if !compare_mtvp_slices(m1, m2) {
-		t.Fatalf("%q != %q", m1, m2)
+func check_measurementTVP_slice_is_correct(t *testing.T, result []MeasurementTVP, expected []MeasurementTVP) {
+	if !compare_mtvp_slices(result, expected) {
+		t.Fatalf("%q != %q", result, expected)
 	}
 }
 
-func check_measuremenTVP_is_correct(t *testing.T, m1 MeasurementTVP, m2 MeasurementTVP) {
-	if m1 != m2 {
-		t.Fatalf("%q != %q", m1, m2)
+func check_measuremenTVP_is_correct(t *testing.T, result MeasurementTVP, expected MeasurementTVP) {
+	if result != expected {
+		t.Fatalf("%q != %q", result, expected)
 	}
 }
 
@@ -175,76 +175,106 @@ func TestLatestDailyPrecipitation(t *testing.T) {
 }
 
 func TestDailyAirTemperatures(t *testing.T) {
+	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	r := dams.DailyAirTemperatures()
-	if !compare_mtvp_slices(r, expected) {
-		t.Fatalf("%q != %q", r, expected)
-	}
+	check_measurementTVP_slice_is_correct(t, dams.DailyAirTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailyAirTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailyAirTemperatures(), expected)
 }
 
 func TestLatestDailyAirTemperature(t *testing.T) {
-	r := dams.LatestDailyAirTemperature()
-	if r != m2 {
-		t.Fatalf("%q != %q", r, m2)
-	}
+	// Normal
+	check_measuremenTVP_is_correct(t, dams.LatestDailyAirTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailyAirTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailyAirTemperature(), m)
 }
 
 func TestDailyMinTemperatures(t *testing.T) {
+	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	r := dams.DailyMinTemperatures()
-	if !compare_mtvp_slices(r, expected) {
-		t.Fatalf("%q != %q", r, expected)
-	}
+	check_measurementTVP_slice_is_correct(t, dams.DailyMinTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailyMinTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailyMinTemperatures(), expected)
 }
 
 func TestLatestDailyMinTemperature(t *testing.T) {
-	r := dams.LatestDailyMinTemperature()
-	if r != m2 {
-		t.Fatalf("%q != %q", r, m2)
-	}
+	// Normal
+	check_measuremenTVP_is_correct(t, dams.LatestDailyMinTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailyMinTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailyMinTemperature(), m)
 }
 
 func TestDailyMaxTemperatures(t *testing.T) {
+	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	r := dams.DailyMaxTemperatures()
-	if !compare_mtvp_slices(r, expected) {
-		t.Fatalf("%q != %q", r, expected)
-	}
+	check_measurementTVP_slice_is_correct(t, dams.DailyMaxTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailyMaxTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailyMaxTemperatures(), expected)
 }
 
 func TestLatestDailyMaxTemperature(t *testing.T) {
-	r := dams.LatestDailyMaxTemperature()
-	if r != m2 {
-		t.Fatalf("%q != %q", r, m2)
-	}
+	// Normal
+	check_measuremenTVP_is_correct(t, dams.LatestDailyMaxTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailyMaxTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailyMaxTemperature(), m)
 }
 
 func TestDailyGroundMinTemperatures(t *testing.T) {
+	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	r := dams.DailyGroundMinTemperatures()
-	if !compare_mtvp_slices(r, expected) {
-		t.Fatalf("%q != %q", r, expected)
-	}
+	check_measurementTVP_slice_is_correct(t, dams.DailyGroundMinTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailyGroundMinTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailyGroundMinTemperatures(), expected)
 }
 
 func TestLatestDailyGroundMinTemperature(t *testing.T) {
-	r := dams.LatestDailyGroundMinTemperature()
-	if r != m2 {
-		t.Fatalf("%q != %q", r, m2)
-	}
+	// Normal
+	check_measuremenTVP_is_correct(t, dams.LatestDailyGroundMinTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailyGroundMinTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailyGroundMinTemperature(), m)
 }
 
 func TestDailySnowDepths(t *testing.T) {
+	// Normal
 	expected := []MeasurementTVP{m1, m2}
-	r := dams.DailySnowDepths()
-	if !compare_mtvp_slices(r, expected) {
-		t.Fatalf("%q != %q", r, expected)
-	}
+	check_measurementTVP_slice_is_correct(t, dams.DailySnowDepths(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_dams.DailySnowDepths(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_dams.DailySnowDepths(), expected)
 }
 
 func TestLatestDailySnowDepth(t *testing.T) {
-	r := dams.LatestDailySnowDepth()
-	if r != m2 {
-		t.Fatalf("%q != %q", r, m2)
-	}
+	// Normal
+	check_measuremenTVP_is_correct(t, dams.LatestDailySnowDepth(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_dams.LatestDailySnowDepth(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_dams.LatestDailySnowDepth(), m)
 }
