@@ -84,8 +84,7 @@ func (am AllMeasrurements) DailyAirTemperatures() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailyAirTemperature() MeasurementTVP {
-	mtvps := am.DailyAirTemperatures()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailyAirTemperatures())
 }
 
 func (am AllMeasrurements) DailyMinTemperatures() []MeasurementTVP {
@@ -93,8 +92,7 @@ func (am AllMeasrurements) DailyMinTemperatures() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailyMinTemperature() MeasurementTVP {
-	mtvps := am.DailyMinTemperatures()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailyMinTemperatures())
 }
 
 func (am AllMeasrurements) DailyMaxTemperatures() []MeasurementTVP {
@@ -102,8 +100,7 @@ func (am AllMeasrurements) DailyMaxTemperatures() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailyMaxTemperature() MeasurementTVP {
-	mtvps := am.DailyMaxTemperatures()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailyMaxTemperatures())
 }
 
 func (am AllMeasrurements) DailyGroundMinTemperatures() []MeasurementTVP {
@@ -111,8 +108,7 @@ func (am AllMeasrurements) DailyGroundMinTemperatures() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailyGroundMinTemperature() MeasurementTVP {
-	mtvps := am.DailyGroundMinTemperatures()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailyGroundMinTemperatures())
 }
 
 func (am AllMeasrurements) DailySnowDepths() []MeasurementTVP {
@@ -120,8 +116,7 @@ func (am AllMeasrurements) DailySnowDepths() []MeasurementTVP {
 }
 
 func (am AllMeasrurements) LatestDailySnowDepth() MeasurementTVP {
-	mtvps := am.DailySnowDepths()
-	return mtvps[len(mtvps)-1]
+	return get_latest(am.DailySnowDepths())
 }
 
 /*
