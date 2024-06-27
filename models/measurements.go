@@ -140,7 +140,7 @@ func (am AllMeasrurements) LatestHourlyMaxTemperature() MeasurementTVP {
 }
 
 func (am AllMeasrurements) HourlyMinTemperatures() []MeasurementTVP {
-	return get_measurements(am, "TA_PT1H_MAX")
+	return get_measurements(am, "TA_PT1H_MIN")
 }
 
 func (am AllMeasrurements) LatestHourlyMinTemperature() MeasurementTVP {
