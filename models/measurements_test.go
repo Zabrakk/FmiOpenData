@@ -69,30 +69,12 @@ var ms = []Point{
 
 var dams = AllMeasrurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
-		{
-			Name: "rrday",
-			Measurements: ms,
-		},
-		{
-			Name: "tday",
-			Measurements: ms,
-		},
-		{
-			Name: "tmin",
-			Measurements: ms,
-		},
-		{
-			Name: "tmax",
-			Measurements: ms,
-		},
-		{
-			Name: "TG_PT12H_min",
-			Measurements: ms,
-		},
-		{
-			Name: "snow",
-			Measurements: ms,
-		},
+		{ Name: "rrday", Measurements: ms },
+		{ Name: "tday", Measurements: ms },
+		{ Name: "tmin", Measurements: ms },
+		{ Name: "tmax", Measurements: ms },
+		{ Name: "TG_PT12H_min", Measurements: ms },
+		{ Name: "snow", Measurements: ms },
 	},
 }
 
@@ -102,30 +84,12 @@ var missing_dams = AllMeasrurements{
 
 var empty_dams = AllMeasrurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
-		{
-			Name: "rrday",
-			Measurements: []Point{},
-		},
-		{
-			Name: "tday",
-			Measurements: []Point{},
-		},
-		{
-			Name: "tmin",
-			Measurements: []Point{},
-		},
-		{
-			Name: "tmax",
-			Measurements: []Point{},
-		},
-		{
-			Name: "TG_PT12H_min",
-			Measurements: []Point{},
-		},
-		{
-			Name: "snow",
-			Measurements: []Point{},
-		},
+		{ Name: "rrday", Measurements: []Point{} },
+		{ Name: "tday", Measurements: []Point{} },
+		{ Name: "tmin", Measurements: []Point{} },
+		{ Name: "tmax", Measurements: []Point{} },
+		{ Name: "TG_PT12H_min", Measurements: []Point{} },
+		{ Name: "snow", Measurements: []Point{} },
 	},
 }
 
@@ -277,4 +241,42 @@ func TestLatestDailySnowDepth(t *testing.T) {
 	check_measuremenTVP_is_correct(t, missing_dams.LatestDailySnowDepth(), m)
 	// Data empty
 	check_measuremenTVP_is_correct(t, empty_dams.LatestDailySnowDepth(), m)
+}
+
+// HOURLY
+
+var hams = AllMeasrurements{
+	MeasurementTimeseries: []MeasurementTimeseries{
+		{ Name: "TA_PT1H_AVG", Measurements: ms },
+		{ Name: "TA_PT1H_MAX", Measurements: ms},
+		{ Name: "TA_PT1H_MIN", Measurements: ms },
+		{ Name: "RH_PT1H_AVG", Measurements: ms },
+		{ Name: "WS_PT1H_AVG", Measurements: ms },
+		{ Name: "WS_PT1H_MAX", Measurements: ms },
+		{ Name: "WS_PT1H_MIN", Measurements: ms },
+		{ Name: "WD_PT1H_AVG", Measurements: ms },
+		{ Name: "PRA_PT1H_ACC", Measurements: ms },
+		{ Name: "PRI_PT1H_MAX", Measurements: ms },
+		{ Name: "PA_PT1H_AVG", Measurements: ms },
+	},
+}
+
+var missing_hams = AllMeasrurements{
+	MeasurementTimeseries: []MeasurementTimeseries{},
+}
+
+var empty_hams = AllMeasrurements{
+	MeasurementTimeseries: []MeasurementTimeseries{
+		{ Name: "TA_PT1H_AVG", Measurements: []Point{} },
+		{ Name: "TA_PT1H_MAX", Measurements: []Point{} },
+		{ Name: "TA_PT1H_MIN", Measurements: []Point{} },
+		{ Name: "RH_PT1H_AVG", Measurements: []Point{} },
+		{ Name: "WS_PT1H_AVG", Measurements: []Point{} },
+		{ Name: "WS_PT1H_MAX", Measurements: []Point{} },
+		{ Name: "WS_PT1H_MIN", Measurements: []Point{} },
+		{ Name: "WD_PT1H_AVG", Measurements: []Point{} },
+		{ Name: "PRA_PT1H_ACC", Measurements: []Point{} },
+		{ Name: "PRI_PT1H_MAX", Measurements: []Point{} },
+		{ Name: "PA_PT1H_AVG", Measurements: []Point{} },
+	},
 }
