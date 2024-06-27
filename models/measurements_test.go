@@ -280,3 +280,235 @@ var empty_hams = AllMeasrurements{
 		{ Name: "PA_PT1H_AVG", Measurements: []Point{} },
 	},
 }
+
+func TestHourlyAirTemperatures(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyAirTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyAirTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyAirTemperatures(), expected)
+}
+
+func TestLatestHourlyAirTemperature(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyAirTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyAirTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyAirTemperature(), m)
+}
+
+func TestHourlyMaxTemperatures(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyMaxTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyMaxTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyMaxTemperatures(), expected)
+}
+
+func TestLatestHourlyMaxTemperature(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyMaxTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyMaxTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyMaxTemperature(), m)
+}
+
+func TestHourlyMinTemperatures(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyMinTemperatures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyMinTemperatures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyMinTemperatures(), expected)
+}
+
+func TestLatestHourlyMinTemperature(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyMinTemperature(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyMinTemperature(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyMinTemperature(), m)
+}
+
+func TestHourlyRelativehumidities(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyRelativehumidities(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyRelativehumidities(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyRelativehumidities(), expected)
+}
+
+func TestLatestHourlyRelativehumidity(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyRelativehumidity(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyRelativehumidity(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyRelativehumidity(), m)
+}
+
+func TestHourlyWindSpeeds(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyWindSpeeds(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyWindSpeeds(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyWindSpeeds(), expected)
+}
+
+func TestLatestHourlyWindSpeed(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyWindSpeed(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyWindSpeed(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyWindSpeed(), m)
+}
+
+func TestHourlyMaxWindSpeeds(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyMaxWindSpeeds(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyMaxWindSpeeds(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyMaxWindSpeeds(), expected)
+}
+
+func TestLatestHourlyMaxWindSpeed(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyMaxWindSpeed(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyMaxWindSpeed(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyMaxWindSpeed(), m)
+}
+
+func TestHourlyMinWindSpeeds(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyMinWindSpeeds(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyMinWindSpeeds(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyMinWindSpeeds(), expected)
+}
+
+func TestLatestHourlyMinWindSpeed(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyMinWindSpeed(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyMinWindSpeed(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyMinWindSpeed(), m)
+}
+
+func TestHourlyWindDirections(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyWindDirections(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyWindDirections(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyWindDirections(), expected)
+}
+
+func TestLatestHourlyWindDirection(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyWindDirection(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyWindDirection(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyWindDirection(), m)
+}
+
+func TestHourlyPrecipitations(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyPrecipitations(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyPrecipitations(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyPrecipitations(), expected)
+}
+
+func TestLatestHourlyPrecipitation(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyPrecipitation(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyPrecipitation(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyPrecipitation(), m)
+}
+
+func TestHourlyMaxPrecipitationIntensities(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyMaxPrecipitationIntensities(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyMaxPrecipitationIntensities(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyMaxPrecipitationIntensities(), expected)
+}
+
+func TestLatestHourlyMaxPrecipitationIntensity(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyMaxPrecipitationIntensity(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyMaxPrecipitationIntensity(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyMaxPrecipitationIntensity(), m)
+}
+
+
+func TestHourlyAirPressures(t *testing.T) {
+	// Normal
+	expected := []MeasurementTVP{m1, m2}
+	check_measurementTVP_slice_is_correct(t, hams.HourlyAirPressures(), expected)
+	// Data missing
+	expected = []MeasurementTVP{}
+	check_measurementTVP_slice_is_correct(t, missing_hams.HourlyAirPressures(), expected)
+	// Data empty
+	check_measurementTVP_slice_is_correct(t, empty_hams.HourlyAirPressures(), expected)
+}
+
+func TestLatestHourlyAirPressure(t *testing.T) {
+	// Normal
+	check_measuremenTVP_is_correct(t, hams.LatestHourlyAirPressure(), m2)
+	// Data missing
+	m := MeasurementTVP{}
+	check_measuremenTVP_is_correct(t, missing_hams.LatestHourlyAirPressure(), m)
+	// Data empty
+	check_measuremenTVP_is_correct(t, empty_hams.LatestHourlyAirPressure(), m)
+}
