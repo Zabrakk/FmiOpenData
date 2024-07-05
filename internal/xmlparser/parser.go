@@ -32,3 +32,14 @@ func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasrurements, error) {
 	return result, nil
 }
 
+func ParseExplainParamResult(respBody io.ReadCloser) (models.ExplainedParam, error) {
+	var result models.ExplainedParam
+	val, err := io.ReadAll(respBody)
+	if err != nil {
+		return models.ExplainedParam{}, err
+	}
+	if err := xml.Unmarshal(val, &result); err != nil {
+		return models.ExplainedParam{}, err
+	}
+	return result, nil
+}
