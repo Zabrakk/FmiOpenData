@@ -1,11 +1,11 @@
 package http
 
 import (
-	"io"
-	"fmt"
-	"strings"
 	"errors"
+	"fmt"
+	"io"
 	nhttp "net/http"
+	"strings"
 
 	"github.com/Zabrakk/FmiOpenData/models"
 )
@@ -57,6 +57,10 @@ func GetQueryResult(query models.ObservationQuery) (io.ReadCloser, error) {
 		return nil, err
 	}
 	fmt.Println(url)
-	result, err := get(url)
-	return result, err
+	return get(url)
+}
+
+func GetUrl(url string) (io.ReadCloser, error) {
+	fmt.Println(url)
+	return get(url)
 }
