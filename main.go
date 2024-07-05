@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Zabrakk/FmiOpenData/models"
 	"github.com/Zabrakk/FmiOpenData/internal/http"
 	"github.com/Zabrakk/FmiOpenData/internal/xmlparser"
+	"github.com/Zabrakk/FmiOpenData/models"
 )
 
 func GetDailyObservationQuery() models.ObservationQuery {
@@ -38,4 +38,22 @@ func GetQueryResult(query models.ObservationQuery) models.AllMeasrurements {
 		return models.AllMeasrurements{}
 	}
 	return result
+}
+
+func ExplainParam(param string) {
+	url := "http://opendata.fmi.fi/meta?observableProperty=observation&param=" + param
+	result, err := http.GetUrl(url)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer result.Close()
+	explainedParam, err := xmlparser.ParseExplainParamResult(result)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Param " + param + ":")
+	fmt.Println(explainedParam.Label)
+	fmt.Println(explainedParam.BasePhenomenon)
 }
