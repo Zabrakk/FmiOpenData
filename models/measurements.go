@@ -4,13 +4,13 @@ package models
 // TODO: Instantaneous Weather Observations (real-time) fmi::observations::weather::multipointcoverage
 
 import (
-	"time"
+	"encoding/xml"
 	"strconv"
 	"strings"
-	"encoding/xml"
+	"time"
 )
 
-type AllMeasrurements struct {
+type AllMeasurements struct {
 	MeasurementTimeseries []MeasurementTimeseries
 }
 
@@ -35,7 +35,7 @@ type MeasurementTVP struct {
 	Value string `xml:"value"`
 }
 
-func get_measurements(am AllMeasrurements, name string) []MeasurementTVP {
+func get_measurements(am AllMeasurements, name string) []MeasurementTVP {
 	var result []MeasurementTVP
 	for _, mts := range am.MeasurementTimeseries {
 		if strings.Contains(mts.Name, name) {
@@ -71,51 +71,51 @@ func (mtvp MeasurementTVP) GetTime() (time.Time, error) {
  * DAILY OBSERVATIONS
 */
 
-func (am AllMeasrurements) DailyPrecipitations() []MeasurementTVP {
+func (am AllMeasurements) DailyPrecipitations() []MeasurementTVP {
 	return get_measurements(am, "rrday")
 }
 
-func (am AllMeasrurements) LatestDailyPrecipitation() MeasurementTVP {
+func (am AllMeasurements) LatestDailyPrecipitation() MeasurementTVP {
 	return get_latest(am.DailyPrecipitations())
 }
 
-func (am AllMeasrurements) DailyAirTemperatures() []MeasurementTVP {
+func (am AllMeasurements) DailyAirTemperatures() []MeasurementTVP {
 	return get_measurements(am, "tday")
 }
 
-func (am AllMeasrurements) LatestDailyAirTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestDailyAirTemperature() MeasurementTVP {
 	return get_latest(am.DailyAirTemperatures())
 }
 
-func (am AllMeasrurements) DailyMinTemperatures() []MeasurementTVP {
+func (am AllMeasurements) DailyMinTemperatures() []MeasurementTVP {
 	return get_measurements(am, "tmin")
 }
 
-func (am AllMeasrurements) LatestDailyMinTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestDailyMinTemperature() MeasurementTVP {
 	return get_latest(am.DailyMinTemperatures())
 }
 
-func (am AllMeasrurements) DailyMaxTemperatures() []MeasurementTVP {
+func (am AllMeasurements) DailyMaxTemperatures() []MeasurementTVP {
 	return get_measurements(am, "tmax")
 }
 
-func (am AllMeasrurements) LatestDailyMaxTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestDailyMaxTemperature() MeasurementTVP {
 	return get_latest(am.DailyMaxTemperatures())
 }
 
-func (am AllMeasrurements) DailyGroundMinTemperatures() []MeasurementTVP {
+func (am AllMeasurements) DailyGroundMinTemperatures() []MeasurementTVP {
 	return get_measurements(am, "TG_PT12H_min")
 }
 
-func (am AllMeasrurements) LatestDailyGroundMinTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestDailyGroundMinTemperature() MeasurementTVP {
 	return get_latest(am.DailyGroundMinTemperatures())
 }
 
-func (am AllMeasrurements) DailySnowDepths() []MeasurementTVP {
+func (am AllMeasurements) DailySnowDepths() []MeasurementTVP {
 	return get_measurements(am, "snow")
 }
 
-func (am AllMeasrurements) LatestDailySnowDepth() MeasurementTVP {
+func (am AllMeasurements) LatestDailySnowDepth() MeasurementTVP {
 	return get_latest(am.DailySnowDepths())
 }
 
@@ -123,90 +123,90 @@ func (am AllMeasrurements) LatestDailySnowDepth() MeasurementTVP {
  * HOURLY OBSERVATIONS
 */
 
-func (am AllMeasrurements) HourlyAirTemperatures() []MeasurementTVP {
+func (am AllMeasurements) HourlyAirTemperatures() []MeasurementTVP {
 	return get_measurements(am, "TA_PT1H_AVG")
 }
 
-func (am AllMeasrurements) LatestHourlyAirTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyAirTemperature() MeasurementTVP {
 	return get_latest(am.HourlyAirTemperatures())
 }
 
-func (am AllMeasrurements) HourlyMaxTemperatures() []MeasurementTVP {
+func (am AllMeasurements) HourlyMaxTemperatures() []MeasurementTVP {
 	return get_measurements(am, "TA_PT1H_MAX")
 }
 
-func (am AllMeasrurements) LatestHourlyMaxTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyMaxTemperature() MeasurementTVP {
 	return get_latest(am.HourlyMaxTemperatures())
 }
 
-func (am AllMeasrurements) HourlyMinTemperatures() []MeasurementTVP {
+func (am AllMeasurements) HourlyMinTemperatures() []MeasurementTVP {
 	return get_measurements(am, "TA_PT1H_MIN")
 }
 
-func (am AllMeasrurements) LatestHourlyMinTemperature() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyMinTemperature() MeasurementTVP {
 	return get_latest(am.HourlyMinTemperatures())
 }
 
-func (am AllMeasrurements) HourlyRelativehumidities() []MeasurementTVP {
+func (am AllMeasurements) HourlyRelativehumidities() []MeasurementTVP {
 	return get_measurements(am, "RH_PT1H_AVG")
 }
 
-func (am AllMeasrurements) LatestHourlyRelativehumidity() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyRelativehumidity() MeasurementTVP {
 	return get_latest(am.HourlyRelativehumidities())
 }
 
-func (am AllMeasrurements) HourlyWindSpeeds() []MeasurementTVP {
+func (am AllMeasurements) HourlyWindSpeeds() []MeasurementTVP {
 	return get_measurements(am, "WS_PT1H_AVG")
 }
 
-func (am AllMeasrurements) LatestHourlyWindSpeed() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyWindSpeed() MeasurementTVP {
 	return get_latest(am.HourlyWindSpeeds())
 }
 
-func (am AllMeasrurements) HourlyMaxWindSpeeds() []MeasurementTVP {
+func (am AllMeasurements) HourlyMaxWindSpeeds() []MeasurementTVP {
 	return get_measurements(am, "WS_PT1H_MAX")
 }
 
-func (am AllMeasrurements) LatestHourlyMaxWindSpeed() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyMaxWindSpeed() MeasurementTVP {
 	return get_latest(am.HourlyMaxWindSpeeds())
 }
 
-func (am AllMeasrurements) HourlyMinWindSpeeds() []MeasurementTVP {
+func (am AllMeasurements) HourlyMinWindSpeeds() []MeasurementTVP {
 	return get_measurements(am, "WS_PT1H_MIN")
 }
 
-func (am AllMeasrurements) LatestHourlyMinWindSpeed() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyMinWindSpeed() MeasurementTVP {
 	return get_latest(am.HourlyMinWindSpeeds())
 }
 
-func (am AllMeasrurements) HourlyWindDirections() []MeasurementTVP {
+func (am AllMeasurements) HourlyWindDirections() []MeasurementTVP {
 	return get_measurements(am, "WD_PT1H_AVG")
 }
 
-func (am AllMeasrurements) LatestHourlyWindDirection() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyWindDirection() MeasurementTVP {
 	return get_latest(am.HourlyWindDirections())
 }
 
-func (am AllMeasrurements) HourlyPrecipitations() []MeasurementTVP {
+func (am AllMeasurements) HourlyPrecipitations() []MeasurementTVP {
 	return get_measurements(am, "PRA_PT1H_ACC")
 }
 
-func (am AllMeasrurements) LatestHourlyPrecipitation() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyPrecipitation() MeasurementTVP {
 	return get_latest(am.HourlyPrecipitations())
 }
 
-func (am AllMeasrurements) HourlyMaxPrecipitationIntensities() []MeasurementTVP {
+func (am AllMeasurements) HourlyMaxPrecipitationIntensities() []MeasurementTVP {
 	return get_measurements(am, "PRI_PT1H_MAX")
 }
 
-func (am AllMeasrurements) LatestHourlyMaxPrecipitationIntensity() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyMaxPrecipitationIntensity() MeasurementTVP {
 	return get_latest(am.HourlyMaxPrecipitationIntensities())
 }
 
-func (am AllMeasrurements) HourlyAirPressures() []MeasurementTVP {
+func (am AllMeasurements) HourlyAirPressures() []MeasurementTVP {
 	return get_measurements(am, "PA_PT1H_AVG")
 }
 
-func (am AllMeasrurements) LatestHourlyAirPressure() MeasurementTVP {
+func (am AllMeasurements) LatestHourlyAirPressure() MeasurementTVP {
 	return get_latest(am.HourlyAirPressures())
 }

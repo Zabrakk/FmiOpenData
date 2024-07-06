@@ -8,8 +8,8 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
-func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasrurements, error) {
-	var result models.AllMeasrurements
+func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
+	var result models.AllMeasurements
 	decoder := xml.NewDecoder(respBody)
 	for {
 		token, err := decoder.Token()

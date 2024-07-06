@@ -1,8 +1,8 @@
 package models
 
 import (
-	"time"
 	"testing"
+	"time"
 )
 
 var measurementTVP = MeasurementTVP{
@@ -67,7 +67,7 @@ var ms = []Point{
 	{ Measurement: m2 },
 }
 
-var dams = AllMeasrurements{
+var dams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
 		{ Name: "rrday", Measurements: ms },
 		{ Name: "tday", Measurements: ms },
@@ -78,11 +78,11 @@ var dams = AllMeasrurements{
 	},
 }
 
-var missing_dams = AllMeasrurements{
+var missing_dams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{},
 }
 
-var empty_dams = AllMeasrurements{
+var empty_dams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
 		{ Name: "rrday", Measurements: []Point{} },
 		{ Name: "tday", Measurements: []Point{} },
@@ -245,7 +245,7 @@ func TestLatestDailySnowDepth(t *testing.T) {
 
 // HOURLY
 
-var hams = AllMeasrurements{
+var hams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
 		{ Name: "TA_PT1H_AVG", Measurements: ms },
 		{ Name: "TA_PT1H_MAX", Measurements: ms},
@@ -261,11 +261,11 @@ var hams = AllMeasrurements{
 	},
 }
 
-var missing_hams = AllMeasrurements{
+var missing_hams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{},
 }
 
-var empty_hams = AllMeasrurements{
+var empty_hams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
 		{ Name: "TA_PT1H_AVG", Measurements: []Point{} },
 		{ Name: "TA_PT1H_MAX", Measurements: []Point{} },

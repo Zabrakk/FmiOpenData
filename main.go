@@ -25,17 +25,17 @@ func TimeToQueryFormat(t time.Time) string {
 	return t.Format("2006-01-02T00:00:00Z")
 }
 
-func GetQueryResult(query models.ObservationQuery) models.AllMeasrurements {
+func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 	queryResult, err := http.GetQueryResult(&query)
 	if err != nil {
 		fmt.Println(err)
-		return models.AllMeasrurements{}
+		return models.AllMeasurements{}
 	}
 	defer queryResult.Close() // Close when this function's execution ends.
 	result, err := xmlparser.ParseQueryResult(queryResult)
 	if err != nil {
 		fmt.Println("ERROR WHILE PARSING XML!!!")
-		return models.AllMeasrurements{}
+		return models.AllMeasurements{}
 	}
 	return result
 }
