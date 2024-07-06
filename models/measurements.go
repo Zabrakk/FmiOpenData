@@ -45,6 +45,14 @@ func get_latest(mtvps []MeasurementTVP) MeasurementTVP {
 	return mtvps[len(mtvps)-1]
 }
 
+func (am AllMeasurements) GetMeasurementNames() []string {
+	var measurement_names []string
+	for _, mts := range am.MeasurementTimeseries {
+		measurement_names = append(measurement_names, mts.Name)
+	}
+	return measurement_names
+}
+
 func (mtvp MeasurementTVP) GetValue() (float64, error) {
 	return strconv.ParseFloat(mtvp.Value, 64)
 }
