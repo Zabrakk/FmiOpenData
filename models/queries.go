@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+	"strings"
 	"time"
 )
 
@@ -60,4 +62,37 @@ func (q *ObservationQuery) SetFmisid(fmisid int) {
 
 func (q *ObservationQuery) SetMaxLocations(maxLocations int) {
 	q.MaxLocations = maxLocations
+}
+
+func (q *storedQuery) ToString() string {
+	s := "&storedquery_id=" + q.Id
+	if len(q.StartTime) > 0 {
+		s += "&starttime=" + q.StartTime
+	}
+	if len(q.EndTime) > 0 {
+		s += "&endtime=" + q.EndTime
+	}
+	if len(q.Parameters) > 0 {
+		s += "&parameters=" + strings.Join(q.Parameters[:], ",")
+	}
+	return s
+}
+
+func (q *ObservationQuery) ToString() string {
+	s := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature"
+	s += q.storedQuery.ToString()
+	if q.Fmisid > 0 {
+		s += "&fmisid=" + fmt.Sprint(q.Fmisid)
+	} else if len(q.Place) > 0 {
+		s += "&place=" + q.Place
+	} else if len(q.Bbox) > 0 {
+		s += "&bbox=" + q.Bbox
+	}
+	if q.Timestep > 0 {
+		s += "&timestep=" + fmt.Sprint(q.Timestep)
+	}
+	if q.MaxLocations > 0 {
+		s += "&maxlocations=" + fmt.Sprint(q.MaxLocations)
+	}
+	return s
 }
