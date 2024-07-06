@@ -19,13 +19,7 @@ type AllMeasurements struct {
 type MeasurementTimeseries struct {
 	Name string
 	XMLName xml.Name `xml:"MeasurementTimeseries"`
-	Measurements []Point `xml:"point"`
-}
-
-// A measurement point includes one measurement time-value pair
-type Point struct {
-	XMLName xml.Name `xml:"point"`
-	Measurement MeasurementTVP `xml:"MeasurementTVP"`
+	Measurements []MeasurementTVP `xml:"point>MeasurementTVP"`
 }
 
 // Measurement Time-Value Pair. Includes the measurement's time and value
@@ -36,13 +30,9 @@ type MeasurementTVP struct {
 }
 
 func get_measurements(am AllMeasurements, name string) []MeasurementTVP {
-	var result []MeasurementTVP
 	for _, mts := range am.MeasurementTimeseries {
 		if strings.Contains(mts.Name, name) {
-			for _, point := range mts.Measurements {
-				result = append(result, point.Measurement)
-			}
-			return result
+			return mts.Measurements
 		}
 	}
 	return nil

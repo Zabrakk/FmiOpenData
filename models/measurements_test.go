@@ -62,10 +62,7 @@ var m2 = MeasurementTVP{
 	Value: "11.5",
 }
 
-var ms = []Point{
-	{ Measurement: m1 },
-	{ Measurement: m2 },
-}
+var ms = []MeasurementTVP{m1, m2}
 
 var dams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
@@ -84,12 +81,12 @@ var missing_dams = AllMeasurements{
 
 var empty_dams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
-		{ Name: "rrday", Measurements: []Point{} },
-		{ Name: "tday", Measurements: []Point{} },
-		{ Name: "tmin", Measurements: []Point{} },
-		{ Name: "tmax", Measurements: []Point{} },
-		{ Name: "TG_PT12H_min", Measurements: []Point{} },
-		{ Name: "snow", Measurements: []Point{} },
+		{ Name: "rrday", Measurements: []MeasurementTVP{} },
+		{ Name: "tday", Measurements: []MeasurementTVP{} },
+		{ Name: "tmin", Measurements: []MeasurementTVP{} },
+		{ Name: "tmax", Measurements: []MeasurementTVP{} },
+		{ Name: "TG_PT12H_min", Measurements: []MeasurementTVP{} },
+		{ Name: "snow", Measurements: []MeasurementTVP{} },
 	},
 }
 
@@ -267,17 +264,17 @@ var missing_hams = AllMeasurements{
 
 var empty_hams = AllMeasurements{
 	MeasurementTimeseries: []MeasurementTimeseries{
-		{ Name: "TA_PT1H_AVG", Measurements: []Point{} },
-		{ Name: "TA_PT1H_MAX", Measurements: []Point{} },
-		{ Name: "TA_PT1H_MIN", Measurements: []Point{} },
-		{ Name: "RH_PT1H_AVG", Measurements: []Point{} },
-		{ Name: "WS_PT1H_AVG", Measurements: []Point{} },
-		{ Name: "WS_PT1H_MAX", Measurements: []Point{} },
-		{ Name: "WS_PT1H_MIN", Measurements: []Point{} },
-		{ Name: "WD_PT1H_AVG", Measurements: []Point{} },
-		{ Name: "PRA_PT1H_ACC", Measurements: []Point{} },
-		{ Name: "PRI_PT1H_MAX", Measurements: []Point{} },
-		{ Name: "PA_PT1H_AVG", Measurements: []Point{} },
+		{ Name: "TA_PT1H_AVG", Measurements: []MeasurementTVP{} },
+		{ Name: "TA_PT1H_MAX", Measurements: []MeasurementTVP{} },
+		{ Name: "TA_PT1H_MIN", Measurements: []MeasurementTVP{} },
+		{ Name: "RH_PT1H_AVG", Measurements: []MeasurementTVP{} },
+		{ Name: "WS_PT1H_AVG", Measurements: []MeasurementTVP{} },
+		{ Name: "WS_PT1H_MAX", Measurements: []MeasurementTVP{} },
+		{ Name: "WS_PT1H_MIN", Measurements: []MeasurementTVP{} },
+		{ Name: "WD_PT1H_AVG", Measurements: []MeasurementTVP{} },
+		{ Name: "PRA_PT1H_ACC", Measurements: []MeasurementTVP{} },
+		{ Name: "PRI_PT1H_MAX", Measurements: []MeasurementTVP{} },
+		{ Name: "PA_PT1H_AVG", Measurements: []MeasurementTVP{} },
 	},
 }
 
