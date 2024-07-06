@@ -26,7 +26,7 @@ func TimeToQueryFormat(t time.Time) string {
 }
 
 func GetQueryResult(query models.ObservationQuery) models.AllMeasrurements {
-	queryResult, err := http.GetQueryResult(query)
+	queryResult, err := http.GetQueryResult(&query)
 	if err != nil {
 		fmt.Println(err)
 		return models.AllMeasrurements{}

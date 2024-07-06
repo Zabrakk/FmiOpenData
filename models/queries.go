@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+type Query interface {
+	ToString() string
+}
+
 type storedQuery struct {
 	Id			string
 	StartTime	string

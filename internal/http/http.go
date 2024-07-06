@@ -17,7 +17,7 @@ func get(url string) (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
-func GetQueryResult(query models.ObservationQuery) (io.ReadCloser, error) {
+func GetQueryResult(query models.Query) (io.ReadCloser, error) {
 	url := query.ToString()
 	fmt.Println(url)
 	return get(url)
