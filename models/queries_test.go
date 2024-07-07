@@ -96,3 +96,34 @@ func TestSetMaxLocations(t *testing.T) {
 		t.Fatalf("%d != %d", q.MaxLocations, expected_val)
 	}
 }
+
+func checkToString(result string, expected string, t *testing.T) {
+	if result != expected {
+		t.Fatalf("\nGot: %s\nExpected %s", result, expected)
+	}
+}
+
+func TestToString(t *testing.T) {
+	q := ObservationQuery{}
+	q.Id = "test"
+	expected := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=test"
+
+	q.Bbox = "22,22,22,22"
+	checkToString(q.ToString(), expected + "&bbox=22,22,22,22", t)
+	q.Bbox = ""
+
+	q.Fmisid = 10
+	checkToString(q.ToString(), expected + "&fmisid=10", t)
+	q.Fmisid = 0
+
+	q.Place = "Test"
+	checkToString(q.ToString(), expected + "&place=Test", t)
+	q.Place = ""
+
+	q.StartTime = "12:13:10"
+	q.EndTime = "12:14:10"
+	q.Parameters = []string{"a","b","c"}
+	q.Timestep = 60
+	q.MaxLocations = 2
+	checkToString(q.ToString(), expected + "&starttime=12:13:10&endtime=12:14:10&parameters=a,b,c&timestep=60&maxlocations=2", t)
+}
