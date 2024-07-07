@@ -44,7 +44,7 @@ func (am AllMeasurements) GetMeasurementTimeseriesNames() []string {
 
 func (am AllMeasurements) GetMeasurementTimeseriesByName(param string) []MeasurementTVP {
 	for _, mts := range am.MeasurementTimeseries {
-		if strings.Contains(mts.Name, param) {
+		if mts.Name == param {
 			return mts.Measurements
 		}
 	}
