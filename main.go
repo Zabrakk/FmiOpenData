@@ -2,6 +2,7 @@ package fmiopendata
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/Zabrakk/FmiOpenData/internal/http"
 	"github.com/Zabrakk/FmiOpenData/internal/xmlparser"
@@ -43,7 +44,12 @@ func ExplainParam(param string) {
 		return
 	}
 	defer result.Close()
-	explainedParam, err := xmlparser.ParseExplainParamResult(result)
+	val, err := io.ReadAll(result)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	explainedParam, err := xmlparser.ParseExplainParamResult([]byte(val))
 	if err != nil {
 		fmt.Println(err)
 		return
