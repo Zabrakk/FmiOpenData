@@ -2,7 +2,6 @@ package fmiopendata
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/Zabrakk/FmiOpenData/internal/http"
 	"github.com/Zabrakk/FmiOpenData/internal/xmlparser"
@@ -19,10 +18,6 @@ func GetHourlyObservationQuery() models.ObservationQuery {
 	query := models.ObservationQuery{}
 	query.Id = "fmi::observations::weather::hourly::timevaluepair"
 	return query
-}
-
-func TimeToQueryFormat(t time.Time) string {
-	return t.Format("2006-01-02T00:00:00Z")
 }
 
 func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
