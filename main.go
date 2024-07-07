@@ -54,6 +54,7 @@ func ExplainParam(param string) {
 		return
 	}
 	fmt.Println("Param " + param + ":")
-	fmt.Println(explainedParam.Label)
-	fmt.Println(explainedParam.BasePhenomenon)
+	fmt.Println("Label:           " + explainedParam.Label)
+	fmt.Println("Base Phenomenon: " + explainedParam.BasePhenomenon)
+	fmt.Println("Unit of measure: " + explainedParam.UOM.Value)
 }
