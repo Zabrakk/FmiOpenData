@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/Zabrakk/FmiOpenData/models"
 )
@@ -24,7 +25,7 @@ func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
 			if startElement.Name.Local == "MeasurementTimeseries" {
 				var measurementTimeseries models.MeasurementTimeseries
 				decoder.DecodeElement(&measurementTimeseries, &startElement)
-				measurementTimeseries.Name = startElement.Attr[0].Value
+				measurementTimeseries.Name = strings.Replace(startElement.Attr[0].Value, "obs-obs-1-1-", "", 1)
 				result.MeasurementTimeseries = append(result.MeasurementTimeseries, measurementTimeseries)
 			}
 		}
