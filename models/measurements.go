@@ -5,6 +5,7 @@ package models
 
 import (
 	"encoding/xml"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -29,6 +30,52 @@ type MeasurementTVP struct {
 	Value string `xml:"value"`
 }
 
+/*
+ * AllMeasurements
+*/
+
+func (am AllMeasurements) GetMeasurementTimeseriesNames() []string {
+	var measurement_names []string
+	for _, mts := range am.MeasurementTimeseries {
+		measurement_names = append(measurement_names, mts.Name)
+	}
+	return measurement_names
+}
+
+func (am AllMeasurements) GetMeasurementTimeseriesByName(param string) []MeasurementTVP {
+	for _, mts := range am.MeasurementTimeseries {
+		if strings.Contains(mts.Name, param) {
+			return mts.Measurements
+		}
+	}
+	return nil
+}
+
+func (am AllMeasurements) GetLatestMeasurementByName(param string) MeasurementTVP {
+	mts := am.GetMeasurementTimeseriesByName(param)
+	if len(mts) > 0 {
+		return mts[len(mts)-1]
+	}
+	fmt.Printf("No latest measurement found for %s\n", param)
+	return MeasurementTVP{}
+}
+
+/*
+ * MeasurementTVP
+*/
+
+func (mtvp MeasurementTVP) GetValue() (float64, error) {
+	return strconv.ParseFloat(mtvp.Value, 64)
+}
+
+func (mtvp MeasurementTVP) GetTime() (time.Time, error) {
+	loc, err := time.LoadLocation("Europe/Helsinki")
+	if err != nil {
+		return time.Time{}, err
+	}
+	return time.ParseInLocation("2006-01-02T15:04:05Z", mtvp.Time, loc)
+}
+
 func get_measurements(am AllMeasurements, name string) []MeasurementTVP {
 	for _, mts := range am.MeasurementTimeseries {
 		if strings.Contains(mts.Name, name) {
@@ -43,26 +90,6 @@ func get_latest(mtvps []MeasurementTVP) MeasurementTVP {
 		return MeasurementTVP{}
 	}
 	return mtvps[len(mtvps)-1]
-}
-
-func (am AllMeasurements) GetMeasurementNames() []string {
-	var measurement_names []string
-	for _, mts := range am.MeasurementTimeseries {
-		measurement_names = append(measurement_names, mts.Name)
-	}
-	return measurement_names
-}
-
-func (mtvp MeasurementTVP) GetValue() (float64, error) {
-	return strconv.ParseFloat(mtvp.Value, 64)
-}
-
-func (mtvp MeasurementTVP) GetTime() (time.Time, error) {
-	loc, err := time.LoadLocation("Europe/Helsinki")
-	if err != nil {
-		return time.Time{}, err
-	}
-	return time.ParseInLocation("2006-01-02T15:04:05Z", mtvp.Time, loc)
 }
 
 /*
