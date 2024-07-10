@@ -15,18 +15,17 @@ http://opendata.fmi.fi/meta?observableProperty=observation
 
 
 ## Suppored stored queries
+The FmiOpenData Go package supports the following stored queries:
 
 ```golang
 "fmi::observations::weather::daily::timevaluepair"
-```
-```golang
+// Accessed in code with
 q := fmiopendata.GetDailyObservationQuery()
 ```
 
 ```golang
 "fmi::observations::weather::hourly::timevaluepair"
-```
-```golang
+// Accessed in code with
 q := fmiopendata.GetHourlyObservationQuery()
 ```
 
