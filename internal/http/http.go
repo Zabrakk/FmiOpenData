@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"io"
 	nhttp "net/http"
-
-	"github.com/Zabrakk/FmiOpenData/models"
 )
 
 func get(url string) (io.ReadCloser, error) {
@@ -15,12 +13,6 @@ func get(url string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	return resp.Body, nil
-}
-
-func GetQueryResult(query models.Query) (io.ReadCloser, error) {
-	url := query.ToString()
-	fmt.Println(url)
-	return get(url)
 }
 
 func GetFromUrl(url string) (io.ReadCloser, error) {

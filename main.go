@@ -22,7 +22,7 @@ func GetHourlyObservationQuery() models.ObservationQuery {
 }
 
 func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
-	queryResult, err := http.GetQueryResult(&query)
+	queryResult, err := http.GetFromUrl(query.ToString())
 	if err != nil {
 		fmt.Println(err)
 		return models.AllMeasurements{}
