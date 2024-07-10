@@ -36,26 +36,27 @@ func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 	return result
 }
 
-func ExplainParam(param string) {
+func ExplainParam(param string) models.ExplainedParam {
 	url := "http://opendata.fmi.fi/meta?observableProperty=observation&param=" + param
 	result, err := http.GetFromUrl(url)
 	if err != nil {
 		fmt.Println(err)
-		return
+		return models.ExplainedParam{}
 	}
 	defer result.Close()
 	val, err := io.ReadAll(result)
 	if err != nil {
 		fmt.Println(err)
-		return
+		return models.ExplainedParam{}
 	}
 	explainedParam, err := xmlparser.ParseExplainParamResult([]byte(val))
 	if err != nil {
 		fmt.Println(err)
-		return
+		return models.ExplainedParam{}
 	}
 	fmt.Println("Param " + param + ":")
 	fmt.Println("Label:           " + explainedParam.Label)
 	fmt.Println("Base Phenomenon: " + explainedParam.BasePhenomenon)
 	fmt.Println("Unit of measure: " + explainedParam.UOM.Value)
+	return explainedParam
 }
