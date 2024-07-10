@@ -38,7 +38,7 @@ func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 
 func ExplainParam(param string) {
 	url := "http://opendata.fmi.fi/meta?observableProperty=observation&param=" + param
-	result, err := http.GetUrl(url)
+	result, err := http.GetFromUrl(url)
 	if err != nil {
 		fmt.Println(err)
 		return

@@ -23,7 +23,7 @@ func GetQueryResult(query models.Query) (io.ReadCloser, error) {
 	return get(url)
 }
 
-func GetUrl(url string) (io.ReadCloser, error) {
+func GetFromUrl(url string) (io.ReadCloser, error) {
 	fmt.Println(url)
 	return get(url)
 }
