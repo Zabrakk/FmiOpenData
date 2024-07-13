@@ -33,6 +33,29 @@ func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	return result, nil
 }
 
+func ParseSimpleQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
+	var result models.AllMeasurements
+	decoder := xml.NewDecoder(respBody)
+	for {
+		token, err := decoder.Token()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			fmt.Println("Error occured while readin XML token")
+			return result, err
+		}
+		if startElement, ok := token.(xml.StartElement); ok {
+			if startElement.Name.Local == "BsWfsElement" {
+				var simpleMeasurement models.SimpleMeasurement
+				decoder.DecodeElement(&simpleMeasurement, &startElement)
+				fmt.Println(simpleMeasurement)
+			}
+		}
+	}
+	return models.AllMeasurements{}, nil
+}
+
 func ParseExplainParamResult(val []byte) (models.ExplainedParam, error) {
 	var result models.ExplainedParam
 	if err := xml.Unmarshal(val, &result); err != nil {
