@@ -29,6 +29,13 @@ type MeasurementTVP struct {
 	Value string `xml:"value"`
 }
 
+type SimpleMeasurement struct {
+	XMLName xml.Name `xml:"BsWfsElement"`
+	Time string	`xml:"Time"`
+	ParameterName string `xml:"ParameterName"`
+	ParameterValue string `xml:"ParameterValue"`
+}
+
 /*
  * AllMeasurements
 */
