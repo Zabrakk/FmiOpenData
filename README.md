@@ -29,6 +29,12 @@ q := fmiopendata.GetDailyObservationQuery()
 q := fmiopendata.GetHourlyObservationQuery()
 ```
 
+```golang
+"fmi::observations::weather::multipointcoverage"
+// Accessed in code with
+q := fmiopendata.GetRealTimeObservationQuery()
+```
+
 ## Explain measurements found in result data
 
 ```golang
