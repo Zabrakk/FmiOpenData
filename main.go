@@ -3,6 +3,7 @@ package fmiopendata
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/Zabrakk/FmiOpenData/internal/http"
 	"github.com/Zabrakk/FmiOpenData/internal/xmlparser"
@@ -21,6 +22,12 @@ func GetHourlyObservationQuery() models.ObservationQuery {
 	return query
 }
 
+func GetRealTimeObservationQuery() models.ObservationQuery {
+	query := models.ObservationQuery{}
+	query.Id = "fmi::observations::weather::simple"
+	return query
+}
+
 func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 	queryResult, err := http.GetFromUrl(query.ToString())
 	if err != nil {
@@ -28,7 +35,12 @@ func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 		return models.AllMeasurements{}
 	}
 	defer queryResult.Close() // Close when this function's execution ends.
-	result, err := xmlparser.ParseQueryResult(queryResult)
+	var result models.AllMeasurements
+	if strings.Contains(query.Id, "simple") {
+		result, err = xmlparser.ParseSimpleQueryResult(queryResult)
+	} else {
+		result, err = xmlparser.ParseQueryResult(queryResult)
+	}
 	if err != nil {
 		fmt.Println("ERROR WHILE PARSING XML!!!")
 		return models.AllMeasurements{}
