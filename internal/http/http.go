@@ -15,6 +15,8 @@ func get(url string) (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
+// Sends a GET requst to the given url. The resulting contents
+// is then returned along with any possible errors.
 func GetFromUrl(url string) (io.ReadCloser, error) {
 	fmt.Println(url)
 	return get(url)
