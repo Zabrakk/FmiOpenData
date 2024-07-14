@@ -20,7 +20,7 @@ import (
 //  place
 //  fmisid
 //  maxlocations
-// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetDailyObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::daily::timevaluepair"
@@ -37,7 +37,7 @@ func GetDailyObservationsStoredQuery() models.StoredQuery {
 //  place
 //  fmisid
 //  maxlocations
-// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetHourlyObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::hourly::timevaluepair"
@@ -54,7 +54,7 @@ func GetHourlyObservationsStoredQuery() models.StoredQuery {
 //  place
 //  fmisid
 //  maxlocations
-// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::simple"
@@ -70,6 +70,7 @@ func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 //  place
 //  latlon
 //  fmisid
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetForecastStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "ecmwf::forecast::surface::point::timevaluepair"
