@@ -61,6 +61,21 @@ func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 	return query
 }
 
+// Returns a stored query for "ecmwf::forecast::surface::point::timevaluepair".
+// Supported query parameters are:
+//  starttime
+//  endtime
+//  timestep
+//  parameters
+//  place
+//  latlon
+//  fmisid
+func GetForecastStoredQuery() models.StoredQuery {
+	query := models.StoredQuery{}
+	query.Id = "ecmwf::forecast::surface::point::timevaluepair"
+	return query
+}
+
 // Performs a GET request, based on the given StoredQuery, to FMI.
 // Returns the data provided by the GET request in a AllMeasurements struct.
 func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
