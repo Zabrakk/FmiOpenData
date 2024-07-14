@@ -9,7 +9,7 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
-func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
+func ParseMeasurementTimeseries(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	var result models.AllMeasurements
 	decoder := xml.NewDecoder(respBody)
 	for {
@@ -33,9 +33,9 @@ func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	return result, nil
 }
 
-func ParseSimpleQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
+func ParseBsWfsElements(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	var result models.AllMeasurements
-	var simpleMeasurements []models.BsWfsElement
+	var bsWfsElements []models.BsWfsElement
 	decoder := xml.NewDecoder(respBody)
 	for {
 		token, err := decoder.Token()
@@ -50,11 +50,11 @@ func ParseSimpleQueryResult(respBody io.ReadCloser) (models.AllMeasurements, err
 			if startElement.Name.Local == "BsWfsElement" {
 				var simpleMeasurement models.BsWfsElement
 				decoder.DecodeElement(&simpleMeasurement, &startElement)
-				simpleMeasurements = append(simpleMeasurements, simpleMeasurement)
+				bsWfsElements = append(bsWfsElements, simpleMeasurement)
 			}
 		}
 	}
-	for _, entry := range simpleMeasurements {
+	for _, entry := range bsWfsElements {
 		addBsWfsElementToAllMeasurements(entry, &result)
 	}
 	return result, nil
@@ -79,7 +79,7 @@ func addBsWfsElementToAllMeasurements(simple models.BsWfsElement, all *models.Al
 	}
 }
 
-func ParseExplainParamResult(val []byte) (models.ExplainedParam, error) {
+func ParseExplainParam(val []byte) (models.ExplainedParam, error) {
 	var result models.ExplainedParam
 	if err := xml.Unmarshal(val, &result); err != nil {
 		return models.ExplainedParam{}, err

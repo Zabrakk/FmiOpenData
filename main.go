@@ -37,9 +37,9 @@ func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
 	defer queryResult.Close() // Close when this function's execution ends.
 	var result models.AllMeasurements
 	if strings.Contains(query.Id, "simple") {
-		result, err = xmlparser.ParseSimpleQueryResult(queryResult)
+		result, err = xmlparser.ParseBsWfsElements(queryResult)
 	} else {
-		result, err = xmlparser.ParseQueryResult(queryResult)
+		result, err = xmlparser.ParseMeasurementTimeseries(queryResult)
 	}
 	if err != nil {
 		fmt.Println("ERROR WHILE PARSING XML!!!")
@@ -61,7 +61,7 @@ func ExplainParam(param string) models.ExplainedParam {
 		fmt.Println(err)
 		return models.ExplainedParam{}
 	}
-	explainedParam, err := xmlparser.ParseExplainParamResult([]byte(val))
+	explainedParam, err := xmlparser.ParseExplainParam([]byte(val))
 	if err != nil {
 		fmt.Println(err)
 		return models.ExplainedParam{}

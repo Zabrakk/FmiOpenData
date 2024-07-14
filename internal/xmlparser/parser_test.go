@@ -12,7 +12,7 @@ func TestParseExplainParameterResult(t *testing.T) {
 		<basePhenomenon>Test2</basePhenomenon>
 		<uom uom="Test3"/>
 	</ObservableProperty>`
-	result, err := ParseExplainParamResult([]byte(xmlFile))
+	result, err := ParseExplainParam([]byte(xmlFile))
 	if err != nil {
 		t.Fatalf("%s", err)
 	}
@@ -27,12 +27,12 @@ func TestParseExplainParameterResult(t *testing.T) {
 	}
 }
 
-func TestParseExplainParamResultMissingField(t *testing.T) {
+func TestParseExplainParamMissingField(t *testing.T) {
 	xmlFile := `<ObservableProperty>
 		<label>Test1</label>
 		<basePhenomenon>Test2</basePhenomenon>
 	</ObservableProperty>`
-	result, err := ParseExplainParamResult([]byte(xmlFile))
+	result, err := ParseExplainParam([]byte(xmlFile))
 	if err != nil {
 		t.Fatalf("%s", err)
 	}
@@ -41,7 +41,7 @@ func TestParseExplainParamResultMissingField(t *testing.T) {
 	}
 }
 
-func TestParseQueryResult(t *testing.T) {
+func TestParseMeasurementTimeseries(t *testing.T) {
 	xmlFile := strings.NewReader(`
 		<wml2:MeasurementTimeseries gml:id="obs-obs-1-1-rrday">
 			<wml2:point>
@@ -73,7 +73,7 @@ func TestParseQueryResult(t *testing.T) {
 		</wml2:MeasurementTimeseries>
 	`)
 	xmlFile2 := io.NopCloser(xmlFile)
-	result, err := ParseQueryResult(xmlFile2)
+	result, err := ParseMeasurementTimeseries(xmlFile2)
 	if err != nil {
 		t.Fatalf("%s", err)
 	}
