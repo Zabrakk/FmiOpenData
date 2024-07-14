@@ -97,3 +97,59 @@ func TestParseMeasurementTimeseries(t *testing.T) {
 		}
 	}
 }
+
+func TestParseBsWfsElements(t *testing.T) {
+	xmlFile := io.NopCloser(strings.NewReader(`
+		<wfs:member>
+			<BsWfs:BsWfsElement>
+				<BsWfs:Time>2024-06-09T00:00:00Z</BsWfs:Time>
+				<BsWfs:ParameterName>t2m</BsWfs:ParameterName>
+				<BsWfs:ParameterValue>16.0</BsWfs:ParameterValue>
+			</BsWfs:BsWfsElement>
+		</wfs:member>
+		<wfs:member>
+			<BsWfs:BsWfsElement>
+				<BsWfs:Time>2024-06-09T00:00:00Z</BsWfs:Time>
+				<BsWfs:ParameterName>ws_10min</BsWfs:ParameterName>
+				<BsWfs:ParameterValue>16.0</BsWfs:ParameterValue>
+			</BsWfs:BsWfsElement>
+		</wfs:member>
+		<wfs:member>
+			<BsWfs:BsWfsElement>
+				<BsWfs:Time>2024-06-09T06:00:00Z</BsWfs:Time>
+				<BsWfs:ParameterName>t2m</BsWfs:ParameterName>
+				<BsWfs:ParameterValue>17.0</BsWfs:ParameterValue>
+			</BsWfs:BsWfsElement>
+		</wfs:member>
+		<wfs:member>
+			<BsWfs:BsWfsElement>
+				<BsWfs:Time>2024-06-09T06:00:00Z</BsWfs:Time>
+				<BsWfs:ParameterName>ws_10min</BsWfs:ParameterName>
+				<BsWfs:ParameterValue>17.0</BsWfs:ParameterValue>
+			</BsWfs:BsWfsElement>
+		</wfs:member>
+	`))
+	result, err := ParseBsWfsElements(xmlFile)
+	if err != nil {
+		t.Fatalf("%s", err)
+	}
+	if len(result.MeasurementTimeseries) != 2 {
+		t.Fatalf("Incorrect number of MeasurementTimeseries: %d", len(result.MeasurementTimeseries))
+	}
+	measurementNames := []string{"t2m", "ws_10min"}
+	measurementTimes := []string{"2024-06-09T00:00:00Z", "2024-06-09T06:00:00Z" }
+	measurementValues := []string{"16.0", "17.0"}
+	for i := 0; i < 2; i++ {
+		if result.MeasurementTimeseries[i].Name != measurementNames[i] {
+			t.Fatalf("Inccorect measurement name for first entry: %s", result.MeasurementTimeseries[i].Name)
+		}
+		for j:= 0; j < 2; j++ {
+			if result.MeasurementTimeseries[i].Measurements[j].Time != measurementTimes[j] {
+				t.Fatalf("Incorrect measurement time for entry i:%d j:%d", i, j)
+			}
+			if result.MeasurementTimeseries[i].Measurements[j].Value != measurementValues[j] {
+				t.Fatalf("Incorrect measurement value for entry i:%d j:%d", i, j)
+			}
+		}
+	}
+}
