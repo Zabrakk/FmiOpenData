@@ -10,18 +10,51 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
+// Returns a stored query for "fmi::observations::weather::daily::timevaluepair"
+// Supported query parameters are:
+//  starttime
+//  endtime
+//  timestep
+//  parameters
+//  bbox
+//  place
+//  fmisid
+//  maxlocations
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
 func GetDailyObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::daily::timevaluepair"
 	return query
 }
 
+// Returns a stored query for "fmi::observations::weather::hourly::timevaluepair"
+// Supported query parameters are:
+//  starttime
+//  endtime
+//  timestep
+//  parameters
+//  bbox
+//  place
+//  fmisid
+//  maxlocations
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
 func GetHourlyObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::hourly::timevaluepair"
 	return query
 }
 
+// Returns a stored query for "fmi::observations::weather::simple"
+// Supported query parameters are:
+//  starttime
+//  endtime
+//  timestep
+//  parameters
+//  bbox
+//  place
+//  fmisid
+//  maxlocations
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info
 func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::simple"
