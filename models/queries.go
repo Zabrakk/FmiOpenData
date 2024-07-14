@@ -82,6 +82,8 @@ func (q *storedQuery) ToString() string {
 	return s
 }
 
+// Returns a string which is a URL created based on the ObservationQuery
+// struct's field values. The URL can then be used in GETing FMI open data
 func (q *ObservationQuery) ToString() string {
 	s := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature"
 	s += q.storedQuery.ToString()
