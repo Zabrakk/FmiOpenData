@@ -1,8 +1,5 @@
 package models
 
-// THESE ARE SYNOP OBSERVATIONS
-// TODO: Instantaneous Weather Observations (real-time) fmi::observations::weather::multipointcoverage
-
 import (
 	"encoding/xml"
 	"fmt"
