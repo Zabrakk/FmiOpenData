@@ -17,6 +17,7 @@ type StoredQuery struct {
 	Parameters	[]string
 	Timestep	int
 	Bbox		string
+	LatLon		string
 	Place 		string
 	Fmisid 		int
 	MaxLocations int
@@ -49,6 +50,11 @@ func (q *StoredQuery) SetParameters(parameters []string) {
 // coordinates of the lower left corner, the last two are top right corner
 func (q *StoredQuery) SetBoundingBox(bbox string) {
 	q.Bbox = bbox
+}
+
+// LatLon format is 60.11,19.90.
+func (q *StoredQuery) SetLatLon(latlon string) {
+	q.LatLon = latlon
 }
 
 func (q *StoredQuery) SetPlace(place string) {
@@ -85,6 +91,9 @@ func (q *StoredQuery) ToString() string {
 	}
 	if len(q.Bbox) > 0 {
 		s += "&bbox=" + q.Bbox
+	}
+	if len(q.LatLon) > 0 {
+		s += "&latlon=" + q.LatLon
 	}
 	if q.Timestep > 0 {
 		s += "&timestep=" + fmt.Sprint(q.Timestep)
