@@ -61,6 +61,8 @@ func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 	return query
 }
 
+// Performs a GET request, based on the given StoredQuery, to FMI.
+// Returns the data provided by the GET request in a AllMeasurements struct.
 func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
 	queryResult, err := http.GetFromUrl(query.ToString())
 	if err != nil {
@@ -81,6 +83,8 @@ func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
 	return result
 }
 
+// This function prints out information provided by FMI on a given parameter.
+// The info is also returned in an ExplainedParam struct.
 func ExplainParam(param string) models.ExplainedParam {
 	url := "http://opendata.fmi.fi/meta?observableProperty=observation&param=" + param
 	result, err := http.GetFromUrl(url)
