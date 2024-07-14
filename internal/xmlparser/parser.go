@@ -9,6 +9,8 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
+// Extracts MeasurementTimeseries from the contents provided by a HTTP GET request.
+// Extracted MeasurementTimeseries are added to the AllMeasurements this function returns.
 func ParseMeasurementTimeseries(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	var result models.AllMeasurements
 	decoder := xml.NewDecoder(respBody)
@@ -33,6 +35,9 @@ func ParseMeasurementTimeseries(respBody io.ReadCloser) (models.AllMeasurements,
 	return result, nil
 }
 
+// Extracts BsWfsElements from the contents provided by a HTTP GET request.
+// Extracted BsWfsElements are converted to MeasurementTVPs and added to the AllMeasurements struct
+// this function returns.
 func ParseBsWfsElements(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	var result models.AllMeasurements
 	var bsWfsElements []models.BsWfsElement
@@ -60,6 +65,8 @@ func ParseBsWfsElements(respBody io.ReadCloser) (models.AllMeasurements, error) 
 	return result, nil
 }
 
+// Converts BsWfsElements to MeasurementTVPs and adds them a AllMeasurements'
+// MeasurementTimeseries based on the measurement's name.
 func addBsWfsElementToAllMeasurements(simple models.BsWfsElement, all *models.AllMeasurements) {
 	mtvp := models.MeasurementTVP{Time: simple.Time, Value: simple.ParameterValue}
 	measurementTypeIncluded := false
@@ -79,6 +86,8 @@ func addBsWfsElementToAllMeasurements(simple models.BsWfsElement, all *models.Al
 	}
 }
 
+// Parses the contents of a HTTP GET request into an ExplainParam struct.
+// Returns the ExplainedParam struct.
 func ParseExplainParam(val []byte) (models.ExplainedParam, error) {
 	var result models.ExplainedParam
 	if err := xml.Unmarshal(val, &result); err != nil {
