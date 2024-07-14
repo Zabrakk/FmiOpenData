@@ -33,8 +33,28 @@ func ParseQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	return result, nil
 }
 
+func addSimpleMeasurementToAllMeasurements(simple models.SimpleMeasurement, all *models.AllMeasurements) {
+	mtvp := models.MeasurementTVP{Time: simple.Time, Value: simple.ParameterValue}
+	measurementTypeIncluded := false
+	i := 0
+	for idx, entry := range all.MeasurementTimeseries {
+		if entry.Name == simple.ParameterName {
+			measurementTypeIncluded = true
+			i = idx
+			break
+		}
+	}
+	if !measurementTypeIncluded {
+		mts := models.MeasurementTimeseries{Name: simple.ParameterName, Measurements: []models.MeasurementTVP{mtvp}}
+		all.MeasurementTimeseries = append(all.MeasurementTimeseries, mts)
+	} else {
+		all.MeasurementTimeseries[i].Measurements = append(all.MeasurementTimeseries[i].Measurements, mtvp)
+	}
+}
+
 func ParseSimpleQueryResult(respBody io.ReadCloser) (models.AllMeasurements, error) {
 	var result models.AllMeasurements
+	var simpleMeasurements []models.SimpleMeasurement
 	decoder := xml.NewDecoder(respBody)
 	for {
 		token, err := decoder.Token()
@@ -49,12 +69,18 @@ func ParseSimpleQueryResult(respBody io.ReadCloser) (models.AllMeasurements, err
 			if startElement.Name.Local == "BsWfsElement" {
 				var simpleMeasurement models.SimpleMeasurement
 				decoder.DecodeElement(&simpleMeasurement, &startElement)
+				simpleMeasurements = append(simpleMeasurements, simpleMeasurement)
 				fmt.Println(simpleMeasurement)
 			}
 		}
 	}
-	return models.AllMeasurements{}, nil
+	for _, entry := range simpleMeasurements {
+		addSimpleMeasurementToAllMeasurements(entry, &result)
+	}
+	return result, nil
 }
+
+
 
 func ParseExplainParamResult(val []byte) (models.ExplainedParam, error) {
 	var result models.ExplainedParam
