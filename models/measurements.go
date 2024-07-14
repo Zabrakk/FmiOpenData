@@ -37,6 +37,7 @@ type BsWfsElement struct {
  * AllMeasurements
 */
 
+// Returns the names of measurements in the AllMeasurements struct
 func (am AllMeasurements) GetMeasurementTimeseriesNames() []string {
 	var measurement_names []string
 	for _, mts := range am.MeasurementTimeseries {
@@ -45,6 +46,9 @@ func (am AllMeasurements) GetMeasurementTimeseriesNames() []string {
 	return measurement_names
 }
 
+// Returns all MeasurementTVPs for the given measurement.
+// For example, GetMeasurementTimeseriesByName("t2m") would return
+// all air temperature measurements in the AllMeasurements.
 func (am AllMeasurements) GetMeasurementTimeseriesByName(param string) []MeasurementTVP {
 	for _, mts := range am.MeasurementTimeseries {
 		if mts.Name == param {
@@ -54,6 +58,9 @@ func (am AllMeasurements) GetMeasurementTimeseriesByName(param string) []Measure
 	return nil
 }
 
+// Returns the most recent MeasurementTVP for the given measurement.
+// For example, GetLatestMeasurementByName("t2m") would return the
+// latest air temperature measurement.
 func (am AllMeasurements) GetLatestMeasurementByName(param string) MeasurementTVP {
 	mts := am.GetMeasurementTimeseriesByName(param)
 	if len(mts) > 0 {
@@ -67,10 +74,12 @@ func (am AllMeasurements) GetLatestMeasurementByName(param string) MeasurementTV
  * MeasurementTVP
 */
 
+// Returns the MeasurementTVP's value as a float64.
 func (mtvp MeasurementTVP) GetValue() (float64, error) {
 	return strconv.ParseFloat(mtvp.Value, 64)
 }
 
+// Returns the time a MeasurementTVP was measured.
 func (mtvp MeasurementTVP) GetTime() (time.Time, error) {
 	loc, err := time.LoadLocation("Europe/Helsinki")
 	if err != nil {
