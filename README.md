@@ -20,19 +20,19 @@ The FmiOpenData Go package supports the following stored queries:
 ```golang
 "fmi::observations::weather::daily::timevaluepair"
 // Accessed in code with
-q := fmiopendata.GetDailyObservationQuery()
+q := fmiopendata.GetDailyObservationsStoredQuery()
 ```
 
 ```golang
 "fmi::observations::weather::hourly::timevaluepair"
 // Accessed in code with
-q := fmiopendata.GetHourlyObservationQuery()
+q := fmiopendata.GetHourlyObservationsStoredQuery()
 ```
 
 ```golang
 "fmi::observations::weather::multipointcoverage"
 // Accessed in code with
-q := fmiopendata.GetRealTimeObservationQuery()
+q := fmiopendata.GetRealTimeObservationsStoredQuery()
 ```
 
 ## Explain measurements found in result data

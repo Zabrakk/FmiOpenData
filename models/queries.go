@@ -10,16 +10,11 @@ type Query interface {
 	ToString() string
 }
 
-type storedQuery struct {
+type StoredQuery struct {
 	Id			string
 	StartTime	string
 	EndTime		string
 	Parameters	[]string
-}
-
-type ObservationQuery struct {
-	// Unsupported parameters: crs, geoid, wmo, timezone
-	storedQuery
 	Timestep	int
 	Bbox		string
 	Place 		string
@@ -32,44 +27,47 @@ func timeToQueryFormat(t time.Time) string {
 }
 
 // Requires year, month, day, hour, minutes and seconds.
-func (q *ObservationQuery) SetStartTime(startTime time.Time) {
+func (q *StoredQuery) SetStartTime(startTime time.Time) {
 	q.StartTime = timeToQueryFormat(startTime)
 }
 
 // Requires year, month, day, hour, minutes and seconds.
-func (q *ObservationQuery) SetEndTime(endTime time.Time) {
+func (q *StoredQuery) SetEndTime(endTime time.Time) {
 	q.EndTime = timeToQueryFormat(endTime)
 }
 
 // Timestep is in minutes.
-func (q *ObservationQuery) SetTimestep(timestep int) {
+func (q *StoredQuery) SetTimestep(timestep int) {
 	q.Timestep = timestep
 }
 
-func (q *ObservationQuery) SetParameters(parameters []string) {
+func (q *StoredQuery) SetParameters(parameters []string) {
 	q.Parameters = parameters
 }
 
 // Bbox format is 22,64,24,68. First two numbers are the
 // coordinates of the lower left corner, the last two are top right corner
-func (q *ObservationQuery) SetBoundingBox(bbox string) {
+func (q *StoredQuery) SetBoundingBox(bbox string) {
 	q.Bbox = bbox
 }
 
-func (q *ObservationQuery) SetPlace(place string) {
+func (q *StoredQuery) SetPlace(place string) {
 	q.Place = place
 }
 
-func (q *ObservationQuery) SetFmisid(fmisid int) {
+func (q *StoredQuery) SetFmisid(fmisid int) {
 	q.Fmisid = fmisid
 }
 
-func (q *ObservationQuery) SetMaxLocations(maxLocations int) {
+func (q *StoredQuery) SetMaxLocations(maxLocations int) {
 	q.MaxLocations = maxLocations
 }
 
-func (q *storedQuery) ToString() string {
-	s := "&storedquery_id=" + q.Id
+// Returns a string which is a URL created based on the StoredQuery
+// struct's field values. The URL can then be used in GETing FMI open data
+func (q *StoredQuery) ToString() string {
+	s := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature"
+	s += "&storedquery_id=" + q.Id
 	if len(q.StartTime) > 0 {
 		s += "&starttime=" + q.StartTime
 	}
@@ -79,19 +77,13 @@ func (q *storedQuery) ToString() string {
 	if len(q.Parameters) > 0 {
 		s += "&parameters=" + strings.Join(q.Parameters[:], ",")
 	}
-	return s
-}
-
-// Returns a string which is a URL created based on the ObservationQuery
-// struct's field values. The URL can then be used in GETing FMI open data
-func (q *ObservationQuery) ToString() string {
-	s := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature"
-	s += q.storedQuery.ToString()
 	if q.Fmisid > 0 {
 		s += "&fmisid=" + fmt.Sprint(q.Fmisid)
-	} else if len(q.Place) > 0 {
+	}
+	if len(q.Place) > 0 {
 		s += "&place=" + q.Place
-	} else if len(q.Bbox) > 0 {
+	}
+	if len(q.Bbox) > 0 {
 		s += "&bbox=" + q.Bbox
 	}
 	if q.Timestep > 0 {

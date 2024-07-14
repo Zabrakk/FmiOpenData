@@ -10,25 +10,25 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
-func GetDailyObservationQuery() models.ObservationQuery {
-	query := models.ObservationQuery{}
+func GetDailyObservationsStoredQuery() models.StoredQuery {
+	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::daily::timevaluepair"
 	return query
 }
 
-func GetHourlyObservationQuery() models.ObservationQuery {
-	query := models.ObservationQuery{}
+func GetHourlyObservationsStoredQuery() models.StoredQuery {
+	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::hourly::timevaluepair"
 	return query
 }
 
-func GetRealTimeObservationQuery() models.ObservationQuery {
-	query := models.ObservationQuery{}
+func GetRealTimeObservationsStoredQuery() models.StoredQuery {
+	query := models.StoredQuery{}
 	query.Id = "fmi::observations::weather::simple"
 	return query
 }
 
-func GetQueryResult(query models.ObservationQuery) models.AllMeasurements {
+func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
 	queryResult, err := http.GetFromUrl(query.ToString())
 	if err != nil {
 		fmt.Println(err)

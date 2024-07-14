@@ -16,7 +16,7 @@ func TestTimeToQueryForm(t *testing.T) {
 }
 
 func TestSetStartTime(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	q.SetStartTime(test_time)
 	if q.StartTime != expected_time_str {
 		t.Fatalf("%q != %q", q.StartTime, expected_time_str)
@@ -24,7 +24,7 @@ func TestSetStartTime(t *testing.T) {
 }
 
 func TestSetEndTime(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	q.SetEndTime(test_time)
 	if q.EndTime != expected_time_str {
 		t.Fatalf("%q != %q", q.EndTime, expected_time_str)
@@ -32,7 +32,7 @@ func TestSetEndTime(t *testing.T) {
 }
 
 func TestSetTimestep(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := 15
 	q.SetTimestep(expected_val)
 	if q.Timestep != expected_val {
@@ -53,7 +53,7 @@ func compare_slices(a []string, b []string) bool {
 }
 
 func TestSetParameters(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := []string{"rrday", "tday"}
 	q.SetParameters(expected_val)
 	if !compare_slices(q.Parameters, expected_val) {
@@ -62,7 +62,7 @@ func TestSetParameters(t *testing.T) {
 }
 
 func TestSetBoundingBox(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := "22,64,24,68"
 	q.SetBoundingBox(expected_val)
 	if q.Bbox != expected_val {
@@ -71,7 +71,7 @@ func TestSetBoundingBox(t *testing.T) {
 }
 
 func TestSetPlace(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := "Helsinki"
 	q.SetPlace(expected_val)
 	if q.Place != expected_val {
@@ -80,7 +80,7 @@ func TestSetPlace(t *testing.T) {
 }
 
 func TestSetFmisid(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := 123
 	q.SetFmisid(expected_val)
 	if q.Fmisid != expected_val {
@@ -89,7 +89,7 @@ func TestSetFmisid(t *testing.T) {
 }
 
 func TestSetMaxLocations(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	expected_val := 10
 	q.SetMaxLocations(expected_val)
 	if q.MaxLocations != expected_val {
@@ -104,7 +104,7 @@ func checkToString(result string, expected string, t *testing.T) {
 }
 
 func TestToString(t *testing.T) {
-	q := ObservationQuery{}
+	q := StoredQuery{}
 	q.Id = "test"
 	expected := "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=test"
 
