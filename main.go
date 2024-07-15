@@ -10,6 +10,10 @@ import (
 	"github.com/Zabrakk/FmiOpenData/models"
 )
 
+func getStoredQuery(id string) models.StoredQuery {
+	return models.StoredQuery{Id: id}
+}
+
 // Returns a stored query for "fmi::observations::weather::daily::timevaluepair"
 // Supported query parameters are:
 //  starttime
@@ -22,9 +26,7 @@ import (
 //  maxlocations
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetDailyObservationsStoredQuery() models.StoredQuery {
-	query := models.StoredQuery{}
-	query.Id = "fmi::observations::weather::daily::timevaluepair"
-	return query
+	return getStoredQuery("fmi::observations::weather::daily::timevaluepair")
 }
 
 // Returns a stored query for "fmi::observations::weather::hourly::timevaluepair"
@@ -39,9 +41,7 @@ func GetDailyObservationsStoredQuery() models.StoredQuery {
 //  maxlocations
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetHourlyObservationsStoredQuery() models.StoredQuery {
-	query := models.StoredQuery{}
-	query.Id = "fmi::observations::weather::hourly::timevaluepair"
-	return query
+	return getStoredQuery("fmi::observations::weather::hourly::timevaluepair")
 }
 
 // Returns a stored query for "fmi::observations::weather::simple"
@@ -56,9 +56,7 @@ func GetHourlyObservationsStoredQuery() models.StoredQuery {
 //  maxlocations
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetRealTimeObservationsStoredQuery() models.StoredQuery {
-	query := models.StoredQuery{}
-	query.Id = "fmi::observations::weather::simple"
-	return query
+	return getStoredQuery("fmi::observations::weather::simple")
 }
 
 // Returns a stored query for "ecmwf::forecast::surface::point::timevaluepair".
@@ -72,9 +70,7 @@ func GetRealTimeObservationsStoredQuery() models.StoredQuery {
 //  fmisid
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetForecastStoredQuery() models.StoredQuery {
-	query := models.StoredQuery{}
-	query.Id = "ecmwf::forecast::surface::point::timevaluepair"
-	return query
+	return getStoredQuery("ecmwf::forecast::surface::point::timevaluepair")
 }
 
 // Returns a stored query for "fmi::forecast::silam::airquality::surface::point::timevaluepair".
@@ -87,9 +83,7 @@ func GetForecastStoredQuery() models.StoredQuery {
 //  fmisid
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
 func GetAirQualityForecast() models.StoredQuery {
-	query := models.StoredQuery{}
-	query.Id = "fmi::forecast::silam::airquality::surface::point::timevaluepair"
-	return query
+	return getStoredQuery("fmi::forecast::silam::airquality::surface::point::timevaluepair")
 }
 
 // Performs a GET request, based on the given StoredQuery, to FMI.
@@ -115,19 +109,17 @@ func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
 }
 
 // This function prints out the information FMI provides on a given observation
-// measurement parameter, e.g. t2m.  The info is also returned in an ExplainedParam struct.
+// measurement parameter, e.g. t2m. The info is also returned in an ExplainedParam struct.
 // Forecast parameters are not supported.
 func ExplainObservationParam(param string) models.ExplainedParam {
-	url := "http://opendata.fmi.fi/meta?observableProperty=observation"
-	return explainParamFromUrl(url, param)
+	return explainParamFromUrl("http://opendata.fmi.fi/meta?observableProperty=observation", param)
 }
 
 // This function prints out the information FMI provides on a given forecast
 // measurement parameter, e.g., aqindex. This info is also returned in an ExplainedParam struct.
 // Observation parameters are not supported.
 func ExplainForecastParam(param string) models.ExplainedParam {
-	url := "http://opendata.fmi.fi/meta?observableProperty=forecast"
-	return explainParamFromUrl(url, param)
+	return explainParamFromUrl("http://opendata.fmi.fi/meta?observableProperty=forecast", param)
 }
 
 func explainParamFromUrl(url string, param string) models.ExplainedParam {
