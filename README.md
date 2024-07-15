@@ -13,6 +13,8 @@ https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services
 
 http://opendata.fmi.fi/meta?observableProperty=observation
 
+https://en.ilmatieteenlaitos.fi/observation-stations
+
 
 ## Suppored stored queries
 The FmiOpenData Go package supports the following stored queries:
