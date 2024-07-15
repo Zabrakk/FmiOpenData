@@ -11,7 +11,7 @@ type AllMeasurements struct {
 	MeasurementTimeseries []MeasurementTimeseries
 }
 
-// Measurement timeseries includes measurement name, e.g. obs-obs-1-1-tday,
+// Measurement timeseries includes measurement name, e.g. tday,
 // and an array of measurement points.
 type MeasurementTimeseries struct {
 	Name string
