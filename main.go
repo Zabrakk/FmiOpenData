@@ -101,9 +101,22 @@ func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
 
 // This function prints out the information FMI provides on a given observation
 // measurement parameter, e.g. t2m.  The info is also returned in an ExplainedParam struct.
-// ECMWF forecast parameters are not supported.
+// Forecast parameters are not supported.
 func ExplainObservationParam(param string) models.ExplainedParam {
-	url := "http://opendata.fmi.fi/meta?observableProperty=observation&param=" + param
+	url := "http://opendata.fmi.fi/meta?observableProperty=observation"
+	return explainParamFromUrl(url, param)
+}
+
+// This function prints out the information FMI provides on a given forecast
+// measurement parameter, e.g., aqindex. This info is also returned in an ExplainedParam struct.
+// Observation parameters are not supported.
+func ExplainForecastParam(param string) models.ExplainedParam {
+	url := "http://opendata.fmi.fi/meta?observableProperty=forecast"
+	return explainParamFromUrl(url, param)
+}
+
+func explainParamFromUrl(url string, param string) models.ExplainedParam {
+	url += "&param=" + param
 	result, err := http.GetFromUrl(url)
 	if err != nil {
 		fmt.Println(err)
