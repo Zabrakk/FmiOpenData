@@ -18,6 +18,6 @@ func get(url string) (io.ReadCloser, error) {
 // Sends a GET requst to the given url. The resulting contents
 // is then returned along with any possible errors.
 func GetFromUrl(url string) (io.ReadCloser, error) {
-	fmt.Println(url)
+	//fmt.Println(url)
 	return get(url)
 }
