@@ -82,7 +82,7 @@ func GetForecastStoredQuery() models.StoredQuery {
 //  latlon
 //  fmisid
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
-func GetAirQualityForecast() models.StoredQuery {
+func GetAirQualityForecastStoredQuery() models.StoredQuery {
 	return getStoredQuery("fmi::forecast::silam::airquality::surface::point::timevaluepair")
 }
 
@@ -96,7 +96,7 @@ func GetAirQualityForecast() models.StoredQuery {
 //  latlon
 //  timezone
 // Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
-func GetWaveHeightForecast() models.StoredQuery {
+func GetWaveHeightForecastStoredQuery() models.StoredQuery {
 	return getStoredQuery("fmi::forecast::wam::point::timevaluepair")
 }
 
