@@ -27,12 +27,18 @@ func ParseMeasurementTimeseries(respBody io.ReadCloser) (models.AllMeasurements,
 			if startElement.Name.Local == "MeasurementTimeseries" {
 				var measurementTimeseries models.MeasurementTimeseries
 				decoder.DecodeElement(&measurementTimeseries, &startElement)
-				measurementTimeseries.Name = strings.Replace(startElement.Attr[0].Value, "obs-obs-1-1-", "", 1)
+				measurementTimeseries.Name = parseMeasurementTimeseriesName(startElement.Attr[0].Value)
 				result.MeasurementTimeseries = append(result.MeasurementTimeseries, measurementTimeseries)
 			}
 		}
 	}
 	return result, nil
+}
+
+func parseMeasurementTimeseriesName(name string) string {
+	name = strings.Replace(name, "obs-obs-1-1-", "", 1)
+	name = strings.Replace(name, "mts-1-1-", "", 1)
+	return name
 }
 
 // Extracts BsWfsElements from the contents provided by a HTTP GET request.

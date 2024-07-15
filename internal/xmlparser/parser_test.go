@@ -47,6 +47,21 @@ var measurementNames = []string{"rrday", "tday"}
 var measurementTimes = []string{"2024-06-09T00:00:00Z", "2024-06-09T06:00:00Z" }
 var measurementValues = []string{"16.0", "17.0"}
 
+func TestParseMeasurementTimeseriesName(t *testing.T) {
+	name := parseMeasurementTimeseriesName("obs-obs-1-1-Test")
+	if name != "Test" {
+		t.Fatalf("Incorrect measurement name parsing: %s", name)
+	}
+	name = parseMeasurementTimeseriesName("mts-1-1-Test")
+	if name != "Test" {
+		t.Fatalf("Incorrect measurement name parsing: %s", name)
+	}
+	name = parseMeasurementTimeseriesName("mts-Test2")
+	if name != "mts-Test2" {
+		t.Fatalf("Incorrect measurement name parsing: %s", name)
+	}
+}
+
 func TestParseMeasurementTimeseries(t *testing.T) {
 	xmlFile := io.NopCloser(strings.NewReader(`
 		<wml2:MeasurementTimeseries gml:id="obs-obs-1-1-` + measurementNames[0] + `">
