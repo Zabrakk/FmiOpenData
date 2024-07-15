@@ -77,6 +77,21 @@ func GetForecastStoredQuery() models.StoredQuery {
 	return query
 }
 
+// Returns a stored query for "fmi::forecast::silam::airquality::surface::point::timevaluepair".
+// Supported query parameters are:
+//  starttime
+//  endtime
+//  timestep
+//  parameters
+//  latlon
+//  fmisid
+// Check https://en.ilmatieteenlaitos.fi/open-data-manual-fmi-wfs-services for more info.
+func GetAirQualityForecast() models.StoredQuery {
+	query := models.StoredQuery{}
+	query.Id = "fmi::forecast::silam::airquality::surface::point::timevaluepair"
+	return query
+}
+
 // Performs a GET request, based on the given StoredQuery, to FMI.
 // Returns the data provided by the GET request in a AllMeasurements struct.
 func GetQueryResult(query models.StoredQuery) models.AllMeasurements {
